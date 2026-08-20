@@ -18,3 +18,6 @@ _temp/
 
 /text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
+
+# Exclude Java class files from compilation
+*.class
