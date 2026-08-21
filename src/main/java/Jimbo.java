@@ -1,6 +1,8 @@
 import tasks.Task;
+import tasks.Todo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -112,6 +114,10 @@ public class Jimbo {
                     } catch (NumberFormatException e) {
                         System.out.println("that doesn't seem like a number... please provide a task number");
                     }
+                    break;
+                case "todo":
+                    storeTask(new Todo(String.join(" ",
+                            Arrays.copyOfRange(inputFragments, 1, inputFragments.length))));
                     break;
                 default:
                     storeTask(new Task(input));
