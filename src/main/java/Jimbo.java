@@ -1,4 +1,5 @@
 import tasks.Deadline;
+import tasks.Event;
 import tasks.Task;
 import tasks.Todo;
 
@@ -104,6 +105,8 @@ public class Jimbo {
             String input = getInput();
             boolean shouldQuit = false;
             String[] inputFragments = input.split(" ");
+            List<String> commandSections = parseCommand(
+                    Arrays.copyOfRange(inputFragments, 1, inputFragments.length));
             switch (inputFragments[0]) {
                 case "bye":
                     shouldQuit = true;
@@ -136,8 +139,6 @@ public class Jimbo {
                             Arrays.copyOfRange(inputFragments, 1, inputFragments.length))));
                     break;
                 case "deadline":
-                    List<String> commandSections = parseCommand(
-                            Arrays.copyOfRange(inputFragments, 1, inputFragments.length));
                     if (commandSections.size() < 2) {
                         System.out.println("expected 2 parameters for command");
                         break;
@@ -154,6 +155,32 @@ public class Jimbo {
                     }
                     String byDate = byParam.substring(byParam.indexOf(byFlag) + byFlag.length());
                     storeTask(new Deadline(commandSections.get(0), byDate));
+                    break;
+                case "event":
+                    if (commandSections.size() < 3) {
+                        System.out.println("expected 3 parameters for command");
+                        break;
+                    }
+                    if (commandSections.size() > 3) {
+                        System.out.println("too many parameters given");
+                        break;
+                    }
+                    String fromFlag = "/from ";
+                    String fromParam = commandSections.get(1);
+                    if (fromParam.indexOf(fromFlag) == -1) {
+                        System.out.println("no from flag found");
+                        break;
+                    }
+                    String fromDate = fromParam.substring(fromParam.indexOf(fromFlag) + fromFlag.length());
+
+                    String toFlag = "/to ";
+                    String toParam = commandSections.get(2);
+                    if (toParam.indexOf(toFlag) == -1) {
+                        System.out.println("no to flag found");
+                        break;
+                    }
+                    String toDate = toParam.substring(toParam.indexOf(toFlag) + toFlag.length());
+                    storeTask(new Event(commandSections.get(0), fromDate, toDate));
                     break;
                 default:
                     storeTask(new Task(input));
