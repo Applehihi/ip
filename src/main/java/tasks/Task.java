@@ -1,8 +1,10 @@
+package tasks;
+
 public class Task {
     private String data;
     private boolean isDone;
 
-    Task(String data) {
+    public Task(String data) {
         this.data = data;
     }
 
