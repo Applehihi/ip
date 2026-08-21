@@ -99,6 +99,15 @@ public class Jimbo {
         commandSections.add(section);
         return commandSections;
     }
+
+    private static void deleteTask(int index) {
+        Task toDelete = tasks.get(index);
+        tasks.remove(index);
+        System.out.println("deleted the following task: ");
+        System.out.println(toDelete);
+        printSeparator();
+    }
+
     public static void main(String[] args) {
         greet();
         while (true) {
@@ -175,6 +184,16 @@ public class Jimbo {
                         }
                         String toDate = toParam.substring(toParam.indexOf(toFlag) + toFlag.length());
                         storeTask(new Event(commandSections.get(0), fromDate, toDate));
+                        break;
+                    case "delete":
+                        try {
+                            var taskIndex = Integer.parseInt(inputFragments[1]);
+                            // Since the list displayed to the user is 1-indexed, we need to
+                            // change it back to 0-indexing
+                            deleteTask(taskIndex - 1);
+                        } catch (NumberFormatException e) {
+                            throw new JimboException("please provide a number");
+                        }
                         break;
                     default:
                         throw new JimboException("i don't understand this command");
