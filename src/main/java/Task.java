@@ -6,6 +6,14 @@ public class Task {
         this.data = data;
     }
 
+    public void mark() {
+        isDone = true;
+    }
+
+    public void unmark() {
+        isDone = false;
+    }
+
     private String formatCheckmark() {
         if (isDone) {
             return "[X]";

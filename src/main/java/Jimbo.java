@@ -37,6 +37,19 @@ public class Jimbo {
         printSeparator();
     }
 
+    private static void markTask(int index) {
+        if (index < 0 || index >= tasks.size()) {
+            System.out.println("that's not a valid task :(");
+            printSeparator();
+            return;
+        }
+        Task task = tasks.get(index);
+        task.mark();
+        System.out.println("marked the following task as done: ");
+        System.out.println(task);
+        printSeparator();
+    }
+
     private static void listTasks() {
         if (tasks.isEmpty()) {
             System.out.println("no tasks stored");
@@ -57,12 +70,23 @@ public class Jimbo {
         while (true) {
             String input = getInput();
             boolean shouldQuit = false;
-            switch (input) {
+            String[] inputFragments = input.split(" ");
+            switch (inputFragments[0]) {
                 case "bye":
                     shouldQuit = true;
                     break;
                 case "list":
                     listTasks();
+                    break;
+                case "mark":
+                    try {
+                        var taskIndex = Integer.parseInt(inputFragments[1]);
+                        // Since the list displayed to the user is 1-indexed, we need to
+                        // change it back to 0-indexing
+                        markTask(taskIndex - 1);
+                    } catch (NumberFormatException e) {
+                        System.out.println("that doesn't seem like a number... please provide a task number");
+                    }
                     break;
                 default:
                     storeTask(new Task(input));
