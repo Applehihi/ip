@@ -107,83 +107,81 @@ public class Jimbo {
             String[] inputFragments = input.split(" ");
             List<String> commandSections = parseCommand(
                     Arrays.copyOfRange(inputFragments, 1, inputFragments.length));
-            switch (inputFragments[0]) {
-                case "bye":
-                    shouldQuit = true;
-                    break;
-                case "list":
-                    listTasks();
-                    break;
-                case "mark":
-                    try {
-                        var taskIndex = Integer.parseInt(inputFragments[1]);
-                        // Since the list displayed to the user is 1-indexed, we need to
-                        // change it back to 0-indexing
-                        markTask(taskIndex - 1);
-                    } catch (NumberFormatException e) {
-                        System.out.println("that doesn't seem like a number... please provide a task number");
-                    }
-                    break;
-                case "unmark":
-                    try {
-                        var taskIndex = Integer.parseInt(inputFragments[1]);
-                        // Since the list displayed to the user is 1-indexed, we need to
-                        // change it back to 0-indexing
-                        unmarkTask(taskIndex - 1);
-                    } catch (NumberFormatException e) {
-                        System.out.println("that doesn't seem like a number... please provide a task number");
-                    }
-                    break;
-                case "todo":
-                    storeTask(new Todo(String.join(" ",
-                            Arrays.copyOfRange(inputFragments, 1, inputFragments.length))));
-                    break;
-                case "deadline":
-                    if (commandSections.size() < 2) {
-                        System.out.println("expected 2 parameters for command");
+            try {
+                switch (inputFragments[0]) {
+                    case "bye":
+                        shouldQuit = true;
                         break;
-                    }
-                    if (commandSections.size() > 2) {
-                        System.out.println("too many parameters given");
+                    case "list":
+                        listTasks();
                         break;
-                    }
-                    String byFlag = "/by ";
-                    String byParam = commandSections.get(1);
-                    if (byParam.indexOf(byFlag) == -1) {
-                        System.out.println("no by flag found");
+                    case "mark":
+                        try {
+                            var taskIndex = Integer.parseInt(inputFragments[1]);
+                            // Since the list displayed to the user is 1-indexed, we need to
+                            // change it back to 0-indexing
+                            markTask(taskIndex - 1);
+                        } catch (NumberFormatException e) {
+                            throw new JimboException("please provide a number");
+                        }
                         break;
-                    }
-                    String byDate = byParam.substring(byParam.indexOf(byFlag) + byFlag.length());
-                    storeTask(new Deadline(commandSections.get(0), byDate));
-                    break;
-                case "event":
-                    if (commandSections.size() < 3) {
-                        System.out.println("expected 3 parameters for command");
+                    case "unmark":
+                        try {
+                            var taskIndex = Integer.parseInt(inputFragments[1]);
+                            // Since the list displayed to the user is 1-indexed, we need to
+                            // change it back to 0-indexing
+                            unmarkTask(taskIndex - 1);
+                        } catch (NumberFormatException e) {
+                            throw new JimboException("please provide a number");
+                        }
                         break;
-                    }
-                    if (commandSections.size() > 3) {
-                        System.out.println("too many parameters given");
+                    case "todo":
+                        storeTask(new Todo(String.join(" ",
+                                Arrays.copyOfRange(inputFragments, 1, inputFragments.length))));
                         break;
-                    }
-                    String fromFlag = "/from ";
-                    String fromParam = commandSections.get(1);
-                    if (fromParam.indexOf(fromFlag) == -1) {
-                        System.out.println("no from flag found");
+                    case "deadline":
+                        if (commandSections.size() < 2) {
+                            throw new JimboException("expected 2 parameters for commands");
+                        }
+                        if (commandSections.size() > 2) {
+                            throw new JimboException("too many parameters given");
+                        }
+                        String byFlag = "/by ";
+                        String byParam = commandSections.get(1);
+                        if (byParam.indexOf(byFlag) == -1) {
+                            throw new JimboException("no /by flag found");
+                        }
+                        String byDate = byParam.substring(byParam.indexOf(byFlag) + byFlag.length());
+                        storeTask(new Deadline(commandSections.get(0), byDate));
                         break;
-                    }
-                    String fromDate = fromParam.substring(fromParam.indexOf(fromFlag) + fromFlag.length());
+                    case "event":
+                        if (commandSections.size() < 3) {
+                            throw new JimboException("expected 3 parameters for commands");
+                        }
+                        if (commandSections.size() > 3) {
+                            throw new JimboException("too many parameters given");
+                        }
+                        String fromFlag = "/from ";
+                        String fromParam = commandSections.get(1);
+                        if (fromParam.indexOf(fromFlag) == -1) {
+                            throw new JimboException("no /from flag found");
+                        }
+                        String fromDate = fromParam.substring(fromParam.indexOf(fromFlag) + fromFlag.length());
 
-                    String toFlag = "/to ";
-                    String toParam = commandSections.get(2);
-                    if (toParam.indexOf(toFlag) == -1) {
-                        System.out.println("no to flag found");
+                        String toFlag = "/to ";
+                        String toParam = commandSections.get(2);
+                        if (toParam.indexOf(toFlag) == -1) {
+                            throw new JimboException("no /to flag found");
+                        }
+                        String toDate = toParam.substring(toParam.indexOf(toFlag) + toFlag.length());
+                        storeTask(new Event(commandSections.get(0), fromDate, toDate));
                         break;
-                    }
-                    String toDate = toParam.substring(toParam.indexOf(toFlag) + toFlag.length());
-                    storeTask(new Event(commandSections.get(0), fromDate, toDate));
-                    break;
-                default:
-                    storeTask(new Task(input));
+                    default:
+                        throw new JimboException("i don't understand this command");
+                }
+            } catch (JimboException e) {
+                System.out.println(e.getMessage());
+                printSeparator();
             }
             if (shouldQuit) {
                 break;
