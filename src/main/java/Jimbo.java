@@ -50,6 +50,19 @@ public class Jimbo {
         printSeparator();
     }
 
+    private static void unmarkTask(int index) {
+        if (index < 0 || index >= tasks.size()) {
+            System.out.println("that's not a valid task :(");
+            printSeparator();
+            return;
+        }
+        Task task = tasks.get(index);
+        task.unmark();
+        System.out.println("unmarked the following task: ");
+        System.out.println(task);
+        printSeparator();
+    }
+
     private static void listTasks() {
         if (tasks.isEmpty()) {
             System.out.println("no tasks stored");
@@ -84,6 +97,16 @@ public class Jimbo {
                         // Since the list displayed to the user is 1-indexed, we need to
                         // change it back to 0-indexing
                         markTask(taskIndex - 1);
+                    } catch (NumberFormatException e) {
+                        System.out.println("that doesn't seem like a number... please provide a task number");
+                    }
+                    break;
+                case "unmark":
+                    try {
+                        var taskIndex = Integer.parseInt(inputFragments[1]);
+                        // Since the list displayed to the user is 1-indexed, we need to
+                        // change it back to 0-indexing
+                        unmarkTask(taskIndex - 1);
                     } catch (NumberFormatException e) {
                         System.out.println("that doesn't seem like a number... please provide a task number");
                     }
