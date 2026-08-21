@@ -1,3 +1,4 @@
+import tasks.Deadline;
 import tasks.Task;
 import tasks.Todo;
 
@@ -82,6 +83,21 @@ public class Jimbo {
         printSeparator();
     }
 
+    private static List<String> parseCommand(String[] commandFragments) {
+        List<String> commandSections = new ArrayList<String>();
+        String section = "";
+        for (String fragment : commandFragments) {
+            if (fragment.length() != 0 && fragment.charAt(0) != '/') {
+                section += " " + fragment;
+
+            } else {
+                commandSections.add(section);
+                section = fragment;
+            }
+        }
+        commandSections.add(section);
+        return commandSections;
+    }
     public static void main(String[] args) {
         greet();
         while (true) {
@@ -118,6 +134,26 @@ public class Jimbo {
                 case "todo":
                     storeTask(new Todo(String.join(" ",
                             Arrays.copyOfRange(inputFragments, 1, inputFragments.length))));
+                    break;
+                case "deadline":
+                    List<String> commandSections = parseCommand(
+                            Arrays.copyOfRange(inputFragments, 1, inputFragments.length));
+                    if (commandSections.size() < 2) {
+                        System.out.println("expected 2 parameters for command");
+                        break;
+                    }
+                    if (commandSections.size() > 2) {
+                        System.out.println("too many parameters given");
+                        break;
+                    }
+                    String byFlag = "/by ";
+                    String byParam = commandSections.get(1);
+                    if (byParam.indexOf(byFlag) == -1) {
+                        System.out.println("no by flag found");
+                        break;
+                    }
+                    String byDate = byParam.substring(byParam.indexOf(byFlag) + byFlag.length());
+                    storeTask(new Deadline(commandSections.get(0), byDate));
                     break;
                 default:
                     storeTask(new Task(input));
