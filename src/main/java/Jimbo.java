@@ -1,7 +1,10 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Jimbo {
     private static final Scanner scanner = new Scanner(System.in);
+    private static List<Task> tasks = new ArrayList<Task>();
 
     private static void printSeparator() {
         System.out.println("--------------------");
@@ -28,6 +31,12 @@ public class Jimbo {
         printSeparator();
     }
 
+    private static void storeTask(Task task) {
+        tasks.add(task);
+        System.out.println("added task: " + task);
+        printSeparator();
+    }
+
     public static void main(String[] args) {
         greet();
         while (true) {
@@ -35,7 +44,7 @@ public class Jimbo {
             if (input.equals("bye")) {
                 break;
             }
-            echo(input);
+            storeTask(new Task(input));
         }
         sayBye();
     }
