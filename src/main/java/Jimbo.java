@@ -37,14 +37,39 @@ public class Jimbo {
         printSeparator();
     }
 
+    private static void listTasks() {
+        if (tasks.isEmpty()) {
+            System.out.println("no tasks stored");
+            printSeparator();
+            return;
+        }
+
+        int counter = 1;
+        for (Task task : tasks) {
+            System.out.println(counter + ". " + task);
+            counter++;
+        }
+        printSeparator();
+    }
+
     public static void main(String[] args) {
         greet();
         while (true) {
             String input = getInput();
-            if (input.equals("bye")) {
+            boolean shouldQuit = false;
+            switch (input) {
+                case "bye":
+                    shouldQuit = true;
+                    break;
+                case "list":
+                    listTasks();
+                    break;
+                default:
+                    storeTask(new Task(input));
+            }
+            if (shouldQuit) {
                 break;
             }
-            storeTask(new Task(input));
         }
         sayBye();
     }
