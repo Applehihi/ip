@@ -1,8 +1,6 @@
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.Todo;
+import tasks.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -193,6 +191,14 @@ public class Jimbo {
                             deleteTask(taskIndex - 1);
                         } catch (NumberFormatException e) {
                             throw new JimboException("please provide a number");
+                        }
+                        break;
+                    case "save":
+                        try {
+                            TaskSaver.save(tasks);
+                            System.out.println("saved tasks to file");
+                        } catch (IOException e) {
+                            throw new JimboException("error while saving");
                         }
                         break;
                     default:
