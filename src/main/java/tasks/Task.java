@@ -1,6 +1,6 @@
 package tasks;
 
-public class Task {
+public abstract class Task {
     private String data;
     private boolean isDone;
 
@@ -27,5 +27,9 @@ public class Task {
     @Override
     public String toString() {
         return formatCheckmark() + " " + data;
+    }
+
+    public String serialise() {
+        return isDone + "|" + data;
     }
 }
