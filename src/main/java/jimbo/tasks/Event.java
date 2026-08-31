@@ -1,13 +1,15 @@
 package jimbo.tasks;
 
+import java.time.LocalDateTime;
+
 public class Event extends Task {
-    private String from;
-    private String to;
+    private LocalDateTime from;
+    private LocalDateTime to;
 
     public Event(String data, String from, String to) {
         super(data);
-        this.from = from;
-        this.to = to;
+        this.from = LocalDateTime.parse(from);
+        this.to = LocalDateTime.parse(to);
     }
 
     @Override

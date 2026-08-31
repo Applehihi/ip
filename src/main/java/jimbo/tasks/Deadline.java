@@ -1,10 +1,13 @@
 package jimbo.tasks;
 
+import java.time.LocalDateTime;
+
 public class Deadline extends Task {
-    private String by;
+    private LocalDateTime by;
+
     public Deadline(String data, String by) {
         super(data);
-        this.by = by;
+        this.by = LocalDateTime.parse(by);
     }
 
     @Override
