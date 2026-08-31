@@ -114,8 +114,29 @@ public class Jimbo {
         printSeparator();
     }
 
+    private static void saveTasks() throws JimboException {
+        try {
+            TaskSaver.save(tasks);
+            System.out.println("saved tasks to file");
+        } catch (IOException e) {
+            throw new JimboException("error while saving");
+        }
+    }
+
+    private static void loadTasks() {
+        try {
+            System.out.println("trying to load saved tasks...");
+            tasks = TaskSaver.load();
+            System.out.println("tasks loaded! " + tasks.size() + " tasks found");
+        } catch (JimboException e) {
+            System.out.println(e.getMessage());
+        }
+        printSeparator();
+    }
+
     public static void main(String[] args) {
         greet();
+        loadTasks();
         while (true) {
             String input = getInput();
             boolean shouldQuit = false;
@@ -202,12 +223,7 @@ public class Jimbo {
                         }
                         break;
                     case "save":
-                        try {
-                            TaskSaver.save(tasks);
-                            System.out.println("saved tasks to file");
-                        } catch (IOException e) {
-                            throw new JimboException("error while saving");
-                        }
+                        saveTasks();
                         break;
                     default:
                         throw new JimboException("i don't understand this command");

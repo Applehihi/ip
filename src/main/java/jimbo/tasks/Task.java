@@ -54,7 +54,7 @@ public abstract class Task {
             default:
                 throw new JimboException("this task type seems invalid");
         }
-        if (params[1] == "1") {
+        if (params[1].equals("1")) {
             task.mark();
         }
         return task;
