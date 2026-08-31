@@ -1,4 +1,4 @@
-package tasks;
+package jimbo.tasks;
 
 public class Event extends Task {
     private String from;
@@ -13,5 +13,10 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from " + from + " to " + to + ")";
+    }
+
+    @Override
+    public String serialise() {
+        return "E|" + super.serialise() + "|" + from + "|" + to;
     }
 }

@@ -1,4 +1,4 @@
-package tasks;
+package jimbo.tasks;
 
 public class Todo extends Task {
     public Todo(String data) {
@@ -8,5 +8,10 @@ public class Todo extends Task {
     @Override
     public String toString() {
         return "[T]" + super.toString();
+    }
+
+    @Override
+    public String serialise() {
+        return "T|" + super.serialise();
     }
 }

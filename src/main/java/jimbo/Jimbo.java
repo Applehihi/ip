@@ -1,8 +1,14 @@
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.Todo;
+package jimbo;
 
+import jimbo.tasks.Deadline;
+import jimbo.tasks.Event;
+import jimbo.tasks.Task;
+import jimbo.tasks.TaskSaver;
+import jimbo.tasks.Todo;
+
+import jimbo.JimboException;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -108,8 +114,30 @@ public class Jimbo {
         printSeparator();
     }
 
+    private static void saveTasks() throws JimboException {
+        try {
+            TaskSaver.save(tasks);
+            System.out.println("saved tasks to file");
+            printSeparator();
+        } catch (IOException e) {
+            throw new JimboException("error while saving");
+        }
+    }
+
+    private static void loadTasks() {
+        try {
+            System.out.println("trying to load saved tasks...");
+            tasks = TaskSaver.load();
+            System.out.println("tasks loaded! " + tasks.size() + " tasks found");
+        } catch (JimboException e) {
+            System.out.println(e.getMessage());
+        }
+        printSeparator();
+    }
+
     public static void main(String[] args) {
         greet();
+        loadTasks();
         while (true) {
             String input = getInput();
             boolean shouldQuit = false;
@@ -133,6 +161,7 @@ public class Jimbo {
                         } catch (NumberFormatException e) {
                             throw new JimboException("please provide a number");
                         }
+                        saveTasks();
                         break;
                     case "unmark":
                         try {
@@ -143,10 +172,12 @@ public class Jimbo {
                         } catch (NumberFormatException e) {
                             throw new JimboException("please provide a number");
                         }
+                        saveTasks();
                         break;
                     case "todo":
                         storeTask(new Todo(String.join(" ",
                                 Arrays.copyOfRange(inputFragments, 1, inputFragments.length))));
+                        saveTasks();
                         break;
                     case "deadline":
                         if (commandSections.size() < 2) {
@@ -162,6 +193,7 @@ public class Jimbo {
                         }
                         String byDate = byParam.substring(byParam.indexOf(byFlag) + byFlag.length());
                         storeTask(new Deadline(commandSections.get(0), byDate));
+                        saveTasks();
                         break;
                     case "event":
                         if (commandSections.size() < 3) {
@@ -184,6 +216,7 @@ public class Jimbo {
                         }
                         String toDate = toParam.substring(toParam.indexOf(toFlag) + toFlag.length());
                         storeTask(new Event(commandSections.get(0), fromDate, toDate));
+                        saveTasks();
                         break;
                     case "delete":
                         try {
@@ -194,6 +227,10 @@ public class Jimbo {
                         } catch (NumberFormatException e) {
                             throw new JimboException("please provide a number");
                         }
+                        saveTasks();
+                        break;
+                    case "save":
+                        saveTasks();
                         break;
                     default:
                         throw new JimboException("i don't understand this command");

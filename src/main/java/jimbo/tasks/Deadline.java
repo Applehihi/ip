@@ -1,4 +1,4 @@
-package tasks;
+package jimbo.tasks;
 
 public class Deadline extends Task {
     private String by;
@@ -10,5 +10,10 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by " + by + ")";
+    }
+
+    @Override
+    public String serialise() {
+        return "D|" + super.serialise() + "|" + by;
     }
 }
