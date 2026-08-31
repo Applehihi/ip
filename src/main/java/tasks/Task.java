@@ -30,6 +30,9 @@ public abstract class Task {
     }
 
     public String serialise() {
-        return isDone + "|" + data;
+        if (isDone) {
+            return 1 + "|" + data;
+        }
+        return 0 + "|" + data;
     }
 }
