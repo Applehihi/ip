@@ -2,7 +2,14 @@ package jimbo.tasks;
 
 import jimbo.JimboException;
 
+import java.time.format.DateTimeFormatter;
+
 public abstract class Task {
+    protected static final DateTimeFormatter INPUT_DATE_TIME_FORMAT = DateTimeFormatter
+            .ofPattern("yyyy-MM-dd HHmm");
+    protected static final DateTimeFormatter FRIENDLY_DATE_TIME_FORMAT = DateTimeFormatter
+            .ofPattern("MMM dd yyyy hh:mma");
+
     private String data;
     private boolean isDone;
 
