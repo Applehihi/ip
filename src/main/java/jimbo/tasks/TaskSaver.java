@@ -1,4 +1,4 @@
-package tasks;
+package jimbo.tasks;
 
 import java.io.File;
 import java.io.FileWriter;

@@ -1,4 +1,4 @@
-package tasks;
+package jimbo.tasks;
 
 public class Deadline extends Task {
     private String by;

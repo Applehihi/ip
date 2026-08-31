@@ -1,4 +1,6 @@
-package tasks;
+package jimbo.tasks;
+
+import jimbo.JimboException;
 
 public abstract class Task {
     private String data;
@@ -34,5 +36,27 @@ public abstract class Task {
             return 1 + "|" + data;
         }
         return 0 + "|" + data;
+    }
+
+    public static Task deserialise(String data) throws JimboException {
+        String[] params = data.split("\\|");
+        Task task;
+        switch (params[0]) {
+            case "T":
+                task = new Todo(params[2]);
+                break;
+            case "D":
+                task = new Deadline(params[2], params[3]);
+                break;
+            case "E":
+                task = new Event(params[2], params[3], params[4]);
+                break;
+            default:
+                throw new JimboException("this task type seems invalid");
+        }
+        if (params[1] == "1") {
+            task.mark();
+        }
+        return task;
     }
 }

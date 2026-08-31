@@ -1,4 +1,12 @@
-import tasks.*;
+package jimbo;
+
+import jimbo.tasks.Deadline;
+import jimbo.tasks.Event;
+import jimbo.tasks.Task;
+import jimbo.tasks.TaskSaver;
+import jimbo.tasks.Todo;
+
+import jimbo.JimboException;
 
 import java.io.IOException;
 import java.util.ArrayList;
