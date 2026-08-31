@@ -118,6 +118,7 @@ public class Jimbo {
         try {
             TaskSaver.save(tasks);
             System.out.println("saved tasks to file");
+            printSeparator();
         } catch (IOException e) {
             throw new JimboException("error while saving");
         }
@@ -160,6 +161,7 @@ public class Jimbo {
                         } catch (NumberFormatException e) {
                             throw new JimboException("please provide a number");
                         }
+                        saveTasks();
                         break;
                     case "unmark":
                         try {
@@ -170,10 +172,12 @@ public class Jimbo {
                         } catch (NumberFormatException e) {
                             throw new JimboException("please provide a number");
                         }
+                        saveTasks();
                         break;
                     case "todo":
                         storeTask(new Todo(String.join(" ",
                                 Arrays.copyOfRange(inputFragments, 1, inputFragments.length))));
+                        saveTasks();
                         break;
                     case "deadline":
                         if (commandSections.size() < 2) {
@@ -189,6 +193,7 @@ public class Jimbo {
                         }
                         String byDate = byParam.substring(byParam.indexOf(byFlag) + byFlag.length());
                         storeTask(new Deadline(commandSections.get(0), byDate));
+                        saveTasks();
                         break;
                     case "event":
                         if (commandSections.size() < 3) {
@@ -211,6 +216,7 @@ public class Jimbo {
                         }
                         String toDate = toParam.substring(toParam.indexOf(toFlag) + toFlag.length());
                         storeTask(new Event(commandSections.get(0), fromDate, toDate));
+                        saveTasks();
                         break;
                     case "delete":
                         try {
@@ -221,6 +227,7 @@ public class Jimbo {
                         } catch (NumberFormatException e) {
                             throw new JimboException("please provide a number");
                         }
+                        saveTasks();
                         break;
                     case "save":
                         saveTasks();
