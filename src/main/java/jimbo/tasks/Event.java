@@ -18,6 +18,10 @@ public class Event extends Task {
             throw new JimboException("invalid date/time, must be in format yyyy-MM-dd HHmm"
                 + "\n" + "example: 2026-01-01 1300 for Jan 1 2026 01:00pm");
         }
+        if (this.from.isAfter(this.to)) {
+            throw new JimboException("time travel is not allowed, sorry :(" + "\n"
+                    + "make sure your from date/time is before your to date/time");
+        }
     }
 
     @Override
