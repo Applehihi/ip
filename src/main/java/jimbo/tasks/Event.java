@@ -1,24 +1,34 @@
 package jimbo.tasks;
 
+import jimbo.JimboException;
+
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
     private LocalDateTime from;
     private LocalDateTime to;
 
-    public Event(String data, String from, String to) {
+    public Event(String data, String from, String to) throws JimboException {
         super(data);
-        this.from = LocalDateTime.parse(from);
-        this.to = LocalDateTime.parse(to);
+        try {
+            this.from = LocalDateTime.parse(from, INPUT_DATE_TIME_FORMAT);
+            this.to = LocalDateTime.parse(to, INPUT_DATE_TIME_FORMAT);
+        } catch (DateTimeParseException e) {
+            throw new JimboException("invalid date/time, must be in format yyyy-MM-dd HHmm"
+                + "\n" + "example: 2026-01-01 1300 for Jan 1 2026 01:00pm");
+        }
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from " + from + " to " + to + ")";
+        return "[E]" + super.toString() + " (from " + from.format(FRIENDLY_DATE_TIME_FORMAT)
+                + " to " + to.format(FRIENDLY_DATE_TIME_FORMAT) + ")";
     }
 
     @Override
     public String serialise() {
-        return "E|" + super.serialise() + "|" + from + "|" + to;
+        return "E|" + super.serialise() + "|" + from.format(INPUT_DATE_TIME_FORMAT) + "|"
+                + to.format(INPUT_DATE_TIME_FORMAT);
     }
 }
