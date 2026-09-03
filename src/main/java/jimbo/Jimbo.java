@@ -12,8 +12,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Jimbo {
-    private List<Task> tasks = new ArrayList<Task>();
     private Ui ui = new Ui();
+    private TaskList tasks = new TaskList();
 
     private void storeTask(Task task) {
         tasks.add(task);
@@ -54,19 +54,15 @@ public class Jimbo {
             return;
         }
 
-        int counter = 1;
-        for (Task task : tasks) {
-            System.out.println(counter + ". " + task);
-            counter++;
-        }
+        System.out.println(tasks.listAll());
         ui.printSeparator();
     }
 
     private static List<String> parseCommand(String[] commandFragments) {
-        List<String> commandSections = new ArrayList<String>();
+        List<String> commandSections = new ArrayList<>();
         String section = "";
         for (String fragment : commandFragments) {
-            if (fragment.length() != 0 && fragment.charAt(0) != '/') {
+            if (fragment.isEmpty() && fragment.charAt(0) != '/') {
                 section += " " + fragment;
 
             } else {
@@ -80,7 +76,7 @@ public class Jimbo {
 
     private void deleteTask(int index) {
         Task toDelete = tasks.get(index);
-        tasks.remove(index);
+        tasks.delete(index);
         System.out.println("deleted the following task: ");
         System.out.println(toDelete);
         ui.printSeparator();
@@ -88,7 +84,7 @@ public class Jimbo {
 
     private void saveTasks() throws JimboException {
         try {
-            Storage.save(tasks);
+            Storage.save(tasks.getInternalList());
             System.out.println("saved tasks to file");
             ui.printSeparator();
         } catch (IOException e) {
@@ -99,7 +95,7 @@ public class Jimbo {
     private void loadTasks() {
         try {
             System.out.println("trying to load saved tasks...");
-            tasks = Storage.load();
+            tasks = new TaskList(Storage.load());
             System.out.println("tasks loaded! " + tasks.size() + " tasks found");
         } catch (JimboException e) {
             System.out.println(e.getMessage());
