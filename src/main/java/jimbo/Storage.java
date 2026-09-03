@@ -1,6 +1,6 @@
-package jimbo.tasks;
+package jimbo;
 
-import jimbo.JimboException;
+import jimbo.tasks.Task;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,29 +10,37 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class TaskSaver {
+public class Storage {
     private static final String TASK_FILE_PATH = "./tasks.txt";
 
-    private static void createFileIfNotExists() throws IOException {
+    private void createFileIfNotExists() throws JimboException {
         File f = new File(TASK_FILE_PATH);
-        if (!f.exists()) {
-            f.createNewFile();
+        try {
+            if (!f.exists()) {
+                f.createNewFile();
+            }
+        } catch (IOException e) {
+            throw new JimboException("failed to create file");
         }
     }
 
-    public static void save(List<? extends Task> tasks) throws IOException {
+    public void save(List<? extends Task> tasks) throws JimboException {
         StringBuilder serialisedData = new StringBuilder();
         for (Task task : tasks) {
             serialisedData.append(task.serialise());
             serialisedData.append('\n');
         }
         createFileIfNotExists();
-        FileWriter fw = new FileWriter(TASK_FILE_PATH);
-        fw.write(serialisedData.toString());
-        fw.close();
+        try {
+            FileWriter fw = new FileWriter(TASK_FILE_PATH);
+            fw.write(serialisedData.toString());
+            fw.close();
+        } catch (IOException e) {
+            throw new JimboException("error while saving :(");
+        }
     }
 
-    public static List<Task> load() throws JimboException {
+    public List<Task> load() throws JimboException {
         File f = new File(TASK_FILE_PATH);
         Scanner s;
         try {
