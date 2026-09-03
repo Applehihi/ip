@@ -6,6 +6,9 @@ import jimbo.tasks.Task;
 import jimbo.tasks.TaskSaver;
 import jimbo.tasks.Todo;
 
+import jimbo.Ui;
+
+
 import jimbo.JimboException;
 
 import java.io.IOException;
@@ -15,70 +18,45 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Jimbo {
-    private static final Scanner scanner = new Scanner(System.in);
-    private static List<Task> tasks = new ArrayList<Task>();
+    private List<Task> tasks = new ArrayList<Task>();
+    private Ui ui = new Ui();
 
-    private static void printSeparator() {
-        System.out.println("--------------------");
-    }
-
-    private static void greet() {
-        System.out.println("hi i'm jimbo");
-        System.out.println("nice to meet you");
-        printSeparator();
-    }
-
-    private static void sayBye() {
-        System.out.println("bye bye");
-        printSeparator();
-    }
-
-    private static String getInput() {
-        System.out.print("> ");
-        return scanner.nextLine();
-    }
-
-    private static void echo(String toEcho) {
-        System.out.println(toEcho);
-        printSeparator();
-    }
-
-    private static void storeTask(Task task) {
+    private void storeTask(Task task) {
         tasks.add(task);
         System.out.println("added task: " + task);
-        printSeparator();
+        ui.printSeparator();
     }
 
-    private static void markTask(int index) {
+    private void markTask(int index) {
         if (index < 0 || index >= tasks.size()) {
             System.out.println("that's not a valid task :(");
-            printSeparator();
+            ui.printSeparator();
             return;
         }
         Task task = tasks.get(index);
         task.mark();
         System.out.println("marked the following task as done: ");
         System.out.println(task);
-        printSeparator();
+        ui.printSeparator();
     }
 
-    private static void unmarkTask(int index) {
+    private void unmarkTask(int index) {
         if (index < 0 || index >= tasks.size()) {
             System.out.println("that's not a valid task :(");
-            printSeparator();
+            ui.printSeparator();
             return;
         }
         Task task = tasks.get(index);
         task.unmark();
         System.out.println("unmarked the following task: ");
         System.out.println(task);
-        printSeparator();
+        ui.printSeparator();
     }
 
-    private static void listTasks() {
+    private void listTasks() {
         if (tasks.isEmpty()) {
             System.out.println("no tasks stored");
-            printSeparator();
+            ui.printSeparator();
             return;
         }
 
@@ -87,7 +65,7 @@ public class Jimbo {
             System.out.println(counter + ". " + task);
             counter++;
         }
-        printSeparator();
+        ui.printSeparator();
     }
 
     private static List<String> parseCommand(String[] commandFragments) {
@@ -106,25 +84,25 @@ public class Jimbo {
         return commandSections;
     }
 
-    private static void deleteTask(int index) {
+    private void deleteTask(int index) {
         Task toDelete = tasks.get(index);
         tasks.remove(index);
         System.out.println("deleted the following task: ");
         System.out.println(toDelete);
-        printSeparator();
+        ui.printSeparator();
     }
 
-    private static void saveTasks() throws JimboException {
+    private void saveTasks() throws JimboException {
         try {
             TaskSaver.save(tasks);
             System.out.println("saved tasks to file");
-            printSeparator();
+            ui.printSeparator();
         } catch (IOException e) {
             throw new JimboException("error while saving");
         }
     }
 
-    private static void loadTasks() {
+    private void loadTasks() {
         try {
             System.out.println("trying to load saved tasks...");
             tasks = TaskSaver.load();
@@ -132,14 +110,14 @@ public class Jimbo {
         } catch (JimboException e) {
             System.out.println(e.getMessage());
         }
-        printSeparator();
+        ui.printSeparator();
     }
 
     public static void main(String[] args) {
-        greet();
-        loadTasks();
+        Jimbo jimbo = new Jimbo();
+        jimbo.loadTasks();
         while (true) {
-            String input = getInput();
+            String input = jimbo.ui.getInput();
             boolean shouldQuit = false;
             String[] inputFragments = input.split(" ");
             List<String> commandSections = parseCommand(
@@ -150,34 +128,34 @@ public class Jimbo {
                         shouldQuit = true;
                         break;
                     case "list":
-                        listTasks();
+                        jimbo.listTasks();
                         break;
                     case "mark":
                         try {
                             var taskIndex = Integer.parseInt(inputFragments[1]);
                             // Since the list displayed to the user is 1-indexed, we need to
                             // change it back to 0-indexing
-                            markTask(taskIndex - 1);
+                            jimbo.markTask(taskIndex - 1);
                         } catch (NumberFormatException e) {
                             throw new JimboException("please provide a number");
                         }
-                        saveTasks();
+                        jimbo.saveTasks();
                         break;
                     case "unmark":
                         try {
                             var taskIndex = Integer.parseInt(inputFragments[1]);
                             // Since the list displayed to the user is 1-indexed, we need to
                             // change it back to 0-indexing
-                            unmarkTask(taskIndex - 1);
+                            jimbo.unmarkTask(taskIndex - 1);
                         } catch (NumberFormatException e) {
                             throw new JimboException("please provide a number");
                         }
-                        saveTasks();
+                        jimbo.saveTasks();
                         break;
                     case "todo":
-                        storeTask(new Todo(String.join(" ",
+                        jimbo.storeTask(new Todo(String.join(" ",
                                 Arrays.copyOfRange(inputFragments, 1, inputFragments.length))));
-                        saveTasks();
+                        jimbo.saveTasks();
                         break;
                     case "deadline":
                         if (commandSections.size() < 2) {
@@ -192,8 +170,8 @@ public class Jimbo {
                             throw new JimboException("no /by flag found");
                         }
                         String byDate = byParam.substring(byParam.indexOf(byFlag) + byFlag.length());
-                        storeTask(new Deadline(commandSections.get(0), byDate));
-                        saveTasks();
+                        jimbo.storeTask(new Deadline(commandSections.get(0), byDate));
+                        jimbo.saveTasks();
                         break;
                     case "event":
                         if (commandSections.size() < 3) {
@@ -215,34 +193,34 @@ public class Jimbo {
                             throw new JimboException("no /to flag found");
                         }
                         String toDate = toParam.substring(toParam.indexOf(toFlag) + toFlag.length());
-                        storeTask(new Event(commandSections.get(0), fromDate, toDate));
-                        saveTasks();
+                        jimbo.storeTask(new Event(commandSections.get(0), fromDate, toDate));
+                        jimbo.saveTasks();
                         break;
                     case "delete":
                         try {
                             var taskIndex = Integer.parseInt(inputFragments[1]);
                             // Since the list displayed to the user is 1-indexed, we need to
                             // change it back to 0-indexing
-                            deleteTask(taskIndex - 1);
+                            jimbo.deleteTask(taskIndex - 1);
                         } catch (NumberFormatException e) {
                             throw new JimboException("please provide a number");
                         }
-                        saveTasks();
+                        jimbo.saveTasks();
                         break;
                     case "save":
-                        saveTasks();
+                        jimbo.saveTasks();
                         break;
                     default:
                         throw new JimboException("i don't understand this command");
                 }
             } catch (JimboException e) {
                 System.out.println(e.getMessage());
-                printSeparator();
+                jimbo.ui.printSeparator();
             }
             if (shouldQuit) {
                 break;
             }
         }
-        sayBye();
+        jimbo.ui.sayBye();
     }
 }
