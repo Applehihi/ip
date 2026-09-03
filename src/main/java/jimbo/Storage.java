@@ -1,6 +1,6 @@
-package jimbo.tasks;
+package jimbo;
 
-import jimbo.JimboException;
+import jimbo.tasks.Task;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class TaskSaver {
+public class Storage {
     private static final String TASK_FILE_PATH = "./tasks.txt";
 
     private static void createFileIfNotExists() throws IOException {

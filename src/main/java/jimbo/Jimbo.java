@@ -3,19 +3,13 @@ package jimbo;
 import jimbo.tasks.Deadline;
 import jimbo.tasks.Event;
 import jimbo.tasks.Task;
-import jimbo.tasks.TaskSaver;
 import jimbo.tasks.Todo;
 
-import jimbo.Ui;
-
-
-import jimbo.JimboException;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 public class Jimbo {
     private List<Task> tasks = new ArrayList<Task>();
@@ -94,7 +88,7 @@ public class Jimbo {
 
     private void saveTasks() throws JimboException {
         try {
-            TaskSaver.save(tasks);
+            Storage.save(tasks);
             System.out.println("saved tasks to file");
             ui.printSeparator();
         } catch (IOException e) {
@@ -105,7 +99,7 @@ public class Jimbo {
     private void loadTasks() {
         try {
             System.out.println("trying to load saved tasks...");
-            tasks = TaskSaver.load();
+            tasks = Storage.load();
             System.out.println("tasks loaded! " + tasks.size() + " tasks found");
         } catch (JimboException e) {
             System.out.println(e.getMessage());
