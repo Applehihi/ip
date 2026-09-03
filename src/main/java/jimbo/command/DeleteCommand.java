@@ -9,6 +9,10 @@ import jimbo.tasks.Task;
 public class DeleteCommand extends Command {
     int index;
 
+    public DeleteCommand(int index) {
+        this.index = index;
+    }
+
     @Override
     public void execute(Ui ui, TaskList tasks, Storage storage) throws JimboException {
         Task toDelete = tasks.get(index);

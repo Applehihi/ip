@@ -9,6 +9,10 @@ import jimbo.tasks.Task;
 public class MarkCommand extends Command {
     private int index;
 
+    public MarkCommand(int index) {
+        this.index = index;
+    }
+
     @Override
     public void execute(Ui ui, TaskList tasks, Storage storage) throws JimboException {
         if (index < 0 || index >= tasks.size()) {
