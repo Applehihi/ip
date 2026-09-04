@@ -66,4 +66,8 @@ public abstract class Task {
         }
         return task;
     }
+
+    public String getData() {
+        return data;
+    }
 }
