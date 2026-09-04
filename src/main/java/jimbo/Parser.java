@@ -1,9 +1,9 @@
 package jimbo;
 
 import jimbo.command.*;
-import jimbo.tasks.Deadline;
-import jimbo.tasks.Event;
-import jimbo.tasks.Todo;
+import jimbo.task.Deadline;
+import jimbo.task.Event;
+import jimbo.task.Todo;
 
 import java.util.ArrayList;
 import java.util.Arrays;

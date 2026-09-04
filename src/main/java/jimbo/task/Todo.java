@@ -1,4 +1,4 @@
-package jimbo.tasks;
+package jimbo.task;
 
 public class Todo extends Task {
     public Todo(String data) {

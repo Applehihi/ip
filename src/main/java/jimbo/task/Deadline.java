@@ -1,4 +1,4 @@
-package jimbo.tasks;
+package jimbo.task;
 
 import jimbo.JimboException;
 

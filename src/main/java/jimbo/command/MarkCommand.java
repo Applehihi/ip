@@ -4,7 +4,7 @@ import jimbo.JimboException;
 import jimbo.Storage;
 import jimbo.TaskList;
 import jimbo.Ui;
-import jimbo.tasks.Task;
+import jimbo.task.Task;
 
 public class MarkCommand extends Command {
     private int index;

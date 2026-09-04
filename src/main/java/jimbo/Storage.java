@@ -1,6 +1,6 @@
 package jimbo;
 
-import jimbo.tasks.Task;
+import jimbo.task.Task;
 
 import java.io.File;
 import java.io.FileNotFoundException;

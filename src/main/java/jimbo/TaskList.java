@@ -1,6 +1,6 @@
 package jimbo;
 
-import jimbo.tasks.Task;
+import jimbo.task.Task;
 
 import java.util.ArrayList;
 import java.util.List;
