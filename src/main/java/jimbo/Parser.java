@@ -97,6 +97,12 @@ public class Parser {
                 String toDate = toParam.substring(toParam.indexOf(toFlag) + toFlag.length());
                 return new TaskCommand(new Event(commandSections.get(0), fromDate, toDate));
                 // No break since return exits function
+            case "find":
+                if (commandSections.size() != 1) {
+                    throw new JimboException("find should not have any flags");
+                }
+                return new FindCommand(commandSections.get(0));
+                // No break since return exits function
             default:
                 throw new JimboException("i don't understand this command");
         }
