@@ -29,10 +29,13 @@ public class Parser {
         switch (commandType) {
             case "bye":
                 return new ByeCommand();
+                // No break since return exits function
             case "list":
                 return new ListCommand();
+                // No break since return exits function
             case "save":
                 return new SaveCommand();
+                // No break since return exits function
             case "mark":
                 try {
                     var taskIndex = Integer.parseInt(inputFragments[1]);
@@ -42,6 +45,7 @@ public class Parser {
                 } catch (NumberFormatException e) {
                     throw new JimboException("please provide a number");
                 }
+                // No break since return and throw exits function
             case "unmark":
                 try {
                     var taskIndex = Integer.parseInt(inputFragments[1]);
@@ -51,9 +55,11 @@ public class Parser {
                 } catch (NumberFormatException e) {
                     throw new JimboException("please provide a number");
                 }
+                // No break since return and throw exits function
             case "todo":
                 return new TaskCommand(new Todo(String.join(" ",
                                 Arrays.copyOfRange(inputFragments, 1, inputFragments.length))));
+                // No break since return exits function
             case "deadline":
                 if (commandSections.size() < 2) {
                     throw new JimboException("expected 2 parameters for commands");
@@ -68,6 +74,7 @@ public class Parser {
                 }
                 String byDate = byParam.substring(byParam.indexOf(byFlag) + byFlag.length());
                 return new TaskCommand(new Deadline(commandSections.get(0), byDate));
+                // No break since return exits function
             case "event":
                 if (commandSections.size() < 3) {
                     throw new JimboException("expected 3 parameters for commands");
@@ -89,6 +96,7 @@ public class Parser {
                 }
                 String toDate = toParam.substring(toParam.indexOf(toFlag) + toFlag.length());
                 return new TaskCommand(new Event(commandSections.get(0), fromDate, toDate));
+                // No break since return exits function
             default:
                 throw new JimboException("i don't understand this command");
         }
