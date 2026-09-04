@@ -2,12 +2,21 @@ package jimbo;
 
 import jimbo.command.Command;
 
+/**
+ * The main app class.
+ *
+ * Jimbo can add and delete tasks, mark and unmark them as deleted,
+ * and save and load them from a while.
+ */
 public class Jimbo {
     private Ui ui;
     private Storage storage;
     private TaskList tasks;
     private Parser parser;
 
+    /**
+     * Initialises Jimbo.
+     */
     public Jimbo() {
         ui = new Ui();
         storage = new Storage();
@@ -26,6 +35,9 @@ public class Jimbo {
         parser = new Parser();
     }
 
+    /**
+     * Starts accepting commands and executing them.
+     */
     public void run() {
         boolean shouldQuit = false;
 

@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Handles the saving and loading of data.
+ */
 public class Storage {
     private static final String TASK_FILE_PATH = "./tasks.txt";
 
@@ -24,6 +27,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves tasks to file.
+     *
+     * @param tasks List of tasks currently being tracked.
+     * @throws JimboException If there is any error writing to file.
+     */
     public void save(List<? extends Task> tasks) throws JimboException {
         StringBuilder serialisedData = new StringBuilder();
         for (Task task : tasks) {
@@ -40,6 +49,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads tasks from file.
+     *
+     * @return The list of tasks loaded.
+     * @throws JimboException If there is any error reading from file.
+     */
     public List<Task> load() throws JimboException {
         File f = new File(TASK_FILE_PATH);
         Scanner s;

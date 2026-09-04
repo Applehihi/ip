@@ -9,7 +9,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Parses user input and matches them to commands.
+ */
 public class Parser {
+    /**
+     * Parses user input into commands.
+     *
+     * @param input Raw string input from user.
+     * @return Command encapsulated as an object.
+     * @throws JimboException When command or arguments are illegal.
+     */
     public Command parse(String input) throws JimboException {
         String[] inputFragments = input.split(" ");
         List<String> commandSections = splitCommandIntoSections(
