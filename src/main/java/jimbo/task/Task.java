@@ -4,6 +4,9 @@ import jimbo.JimboException;
 
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The base abstract task class.
+ */
 public abstract class Task {
     protected static final DateTimeFormatter INPUT_DATE_TIME_FORMAT = DateTimeFormatter
             .ofPattern("yyyy-MM-dd HHmm");

@@ -5,6 +5,9 @@ import jimbo.JimboException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
+/**
+ * A task that should be done by a certain time.
+ */
 public class Deadline extends Task {
     private LocalDateTime by;
 

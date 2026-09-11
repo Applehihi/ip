@@ -5,6 +5,9 @@ import jimbo.JimboException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Something that occurs within a time range.
+ */
 public class Event extends Task {
     private LocalDateTime from;
     private LocalDateTime to;
