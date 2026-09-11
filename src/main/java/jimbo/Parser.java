@@ -1,6 +1,13 @@
 package jimbo;
 
-import jimbo.command.*;
+import jimbo.command.ByeCommand;
+import jimbo.command.Command;
+import jimbo.command.FindCommand;
+import jimbo.command.ListCommand;
+import jimbo.command.MarkCommand;
+import jimbo.command.SaveCommand;
+import jimbo.command.TaskCommand;
+import jimbo.command.UnmarkCommand;
 import jimbo.task.Deadline;
 import jimbo.task.Event;
 import jimbo.task.Todo;

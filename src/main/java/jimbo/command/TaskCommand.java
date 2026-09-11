@@ -6,7 +6,7 @@ import jimbo.TaskList;
 import jimbo.Ui;
 import jimbo.task.Task;
 
-public class TaskCommand extends Command{
+public class TaskCommand extends Command {
     Task task;
 
     public TaskCommand(Task task) {

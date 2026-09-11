@@ -20,6 +20,7 @@ public class TaskList {
 
     /**
      * Constructs a TaskList from a raw Java List of tasks.
+     *
      * @param tasks List of tasks.
      */
     public TaskList(List<Task> tasks) {
@@ -28,6 +29,7 @@ public class TaskList {
 
     /**
      * Adds a task to the list.
+     *
      * @param task The task to add.
      */
     public void add(Task task) {
@@ -36,6 +38,7 @@ public class TaskList {
 
     /**
      * Deletes a task from the list based on the index provided.
+     *
      * @param index The index of the task to delete.
      */
     public void delete(int index) {
@@ -44,6 +47,7 @@ public class TaskList {
 
     /**
      * Gets the task in the list with the specified index.
+     *
      * @param index The index of the task.
      * @return The task.
      */
@@ -53,6 +57,7 @@ public class TaskList {
 
     /**
      * Calculates how many total tasks are in the list.
+     *
      * @return The number of tasks in the list.
      */
     public int size() {
@@ -61,6 +66,7 @@ public class TaskList {
 
     /**
      * Returns whether the list is empty
+     *
      * @return Whether the list is empty.
      */
     public boolean isEmpty() {
@@ -69,6 +75,7 @@ public class TaskList {
 
     /**
      * Returns the list of tasks formatted as a String.
+     *
      * @return The list tasks as a String.
      */
     public String listAll() {
@@ -84,6 +91,7 @@ public class TaskList {
 
     /**
      * Returns the raw internal List representation of the tasks.
+     *
      * @return Raw List of tasks.
      */
     public List<Task> getInternalList() {
