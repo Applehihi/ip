@@ -52,7 +52,7 @@ test {
 }
 
 application {
-    mainClass = 'jimbo.Jimbo'
+    mainClass = 'jimbo.Launcher'
 }
 
 jar {

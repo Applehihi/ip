@@ -62,4 +62,8 @@ public class Jimbo {
         Jimbo jimbo = new Jimbo();
         jimbo.run();
     }
+
+    public String getResponse(String input) {
+        return "todo";
+    }
 }
