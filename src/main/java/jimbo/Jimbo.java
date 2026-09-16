@@ -1,6 +1,7 @@
 package jimbo;
 
 import jimbo.command.Command;
+import jimbo.ui.Ui;
 
 /**
  * The main app class.

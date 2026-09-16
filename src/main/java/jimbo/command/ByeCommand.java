@@ -1,9 +1,8 @@
 package jimbo.command;
 
-import jimbo.JimboException;
 import jimbo.Storage;
 import jimbo.TaskList;
-import jimbo.Ui;
+import jimbo.ui.Ui;
 
 public class ByeCommand extends Command {
 

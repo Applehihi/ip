@@ -3,7 +3,7 @@ package jimbo.command;
 import jimbo.JimboException;
 import jimbo.Storage;
 import jimbo.TaskList;
-import jimbo.Ui;
+import jimbo.ui.Ui;
 import jimbo.task.Task;
 
 public class FindCommand extends Command {

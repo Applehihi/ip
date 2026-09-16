@@ -1,4 +1,4 @@
-package jimbo;
+package jimbo.ui;
 
 import java.util.Scanner;
 
