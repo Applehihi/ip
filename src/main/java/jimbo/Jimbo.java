@@ -1,5 +1,6 @@
 package jimbo;
 
+import javafx.application.Platform;
 import jimbo.command.Command;
 import jimbo.ui.Ui;
 
@@ -64,6 +65,24 @@ public class Jimbo {
     }
 
     public String getResponse(String input) {
+        processInput(input);
         return "todo";
+    }
+
+    private void processInput(String input) {
+        try {
+            Command command = parser.parse(input);
+            command.execute(ui, tasks, storage);
+//            shouldQuit = command.shouldQuit();
+            if (command.shouldSave()) {
+                storage.save(tasks.getInternalList());
+            }
+            if (command.shouldQuit()) {
+                Platform.exit();
+            }
+        } catch (JimboException e) {
+            System.out.println(e.getMessage());
+            ui.printSeparator();
+        }
     }
 }
