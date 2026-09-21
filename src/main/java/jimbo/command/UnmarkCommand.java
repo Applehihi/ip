@@ -15,6 +15,8 @@ public class UnmarkCommand extends Command {
 
     @Override
     public String execute(Ui ui, TaskList tasks, Storage storage) throws JimboException {
+        assert tasks != null : "tasks should not be null";
+
         if (index < 0 || index >= tasks.size()) {
             return "that's not a valid task :(";
         }

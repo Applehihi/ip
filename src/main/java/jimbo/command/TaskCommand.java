@@ -15,6 +15,8 @@ public class TaskCommand extends Command {
 
     @Override
     public String execute(Ui ui, TaskList tasks, Storage storage) throws JimboException {
+        assert tasks != null : "tasks should not be null";
+
         tasks.add(task);
         return "added task:" + task;
     }
