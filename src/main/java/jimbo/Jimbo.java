@@ -37,12 +37,12 @@ public class Jimbo {
         parser = new Parser();
     }
 
-    public String getResponse(String input) {
+    public String getResponse(String input) throws JimboException {
         String response;
         try {
             response = processInput(input);
         } catch (JimboException e) {
-            response = "uh oh:\n" + e.getMessage();
+            throw new JimboException("uh oh\n" + e.getMessage());
         }
         return response;
     }
