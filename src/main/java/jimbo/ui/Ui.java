@@ -1,4 +1,6 @@
-package jimbo;
+package jimbo.ui;
+
+import jimbo.JimboException;
 
 import java.util.Scanner;
 
@@ -43,5 +45,26 @@ public class Ui {
     public String getInput() {
         System.out.print("> ");
         return SCANNER.nextLine();
+    }
+
+    /**
+     * Prints Jimbo's response to console.
+     *
+     * @param response Jimbo's response.
+     */
+    public void printResponse(String response) {
+        System.out.println(response);
+        printSeparator();
+    }
+
+    /**
+     * Prints an error message to console.
+     *
+     * @param error The error.
+     */
+    public void printError(JimboException error) {
+        System.out.println("uh oh you got an error: ");
+        System.out.println(error.getMessage());
+        printSeparator();
     }
 }

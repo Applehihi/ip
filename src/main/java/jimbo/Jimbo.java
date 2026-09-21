@@ -1,6 +1,8 @@
 package jimbo;
 
+import javafx.application.Platform;
 import jimbo.command.Command;
+import jimbo.ui.Ui;
 
 /**
  * The main app class.
@@ -60,5 +62,27 @@ public class Jimbo {
     public static void main(String[] args) {
         Jimbo jimbo = new Jimbo();
         jimbo.run();
+    }
+
+    public String getResponse(String input) {
+        String response;
+        try {
+            response = processInput(input);
+        } catch (JimboException e) {
+            response = "uh oh:\n" + e.getMessage();
+        }
+        return response;
+    }
+
+    private String processInput(String input) throws JimboException{
+        Command command = parser.parse(input);
+        String response = command.execute(ui, tasks, storage);
+        if (command.shouldSave()) {
+            storage.save(tasks.getInternalList());
+        }
+        if (command.shouldQuit()) {
+            Platform.exit();
+        }
+        return response;
     }
 }

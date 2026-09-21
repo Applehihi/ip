@@ -3,7 +3,7 @@ package jimbo.command;
 import jimbo.JimboException;
 import jimbo.Storage;
 import jimbo.TaskList;
-import jimbo.Ui;
+import jimbo.ui.Ui;
 import jimbo.task.Task;
 
 public class UnmarkCommand extends Command {
@@ -14,17 +14,13 @@ public class UnmarkCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui, TaskList tasks, Storage storage) throws JimboException {
+    public String execute(Ui ui, TaskList tasks, Storage storage) throws JimboException {
         if (index < 0 || index >= tasks.size()) {
-            System.out.println("that's not a valid task :(");
-            ui.printSeparator();
-            return;
+            return "that's not a valid task :(";
         }
         Task task = tasks.get(index);
         task.unmark();
-        System.out.println("unmarked the following task: ");
-        System.out.println(task);
-        ui.printSeparator();
+        return "unmarked the following task:\n" + task;
     }
 
     @Override

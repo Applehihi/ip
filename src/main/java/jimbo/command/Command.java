@@ -3,7 +3,7 @@ package jimbo.command;
 import jimbo.JimboException;
 import jimbo.Storage;
 import jimbo.TaskList;
-import jimbo.Ui;
+import jimbo.ui.Ui;
 
 /**
  * Represents a command that Jimbo can perform.
@@ -15,8 +15,10 @@ public abstract class Command {
      * @param tasks Jimbo's task list.
      * @param storage Jimbo's Storage object.
      * @throws JimboException If any error occurs when executing the command.
+     *
+     * @return Jimbo's response after executing the command.
      */
-    public abstract void execute(Ui ui, TaskList tasks, Storage storage) throws JimboException;
+    public abstract String execute(Ui ui, TaskList tasks, Storage storage) throws JimboException;
 
     /**
      * Returns whether Jimbo should quit after running the command.

@@ -3,7 +3,7 @@ package jimbo.command;
 import jimbo.JimboException;
 import jimbo.Storage;
 import jimbo.TaskList;
-import jimbo.Ui;
+import jimbo.ui.Ui;
 import jimbo.task.Task;
 
 public class FindCommand extends Command {
@@ -14,18 +14,19 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui, TaskList tasks, Storage storage) throws JimboException {
+    public String execute(Ui ui, TaskList tasks, Storage storage) throws JimboException {
         int counter = 1;
+        StringBuilder response = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             if (task.getData().contains(toFind)) {
-                System.out.println(counter + ". " + task);
+                response.append(counter + ". " + task + '\n');
                 counter++;
             }
         }
         if (counter == 1) {
-            System.out.println("nothing found :(");
+            return "nothing found :(";
         }
-        ui.printSeparator();
+        return response.toString();
     }
 }

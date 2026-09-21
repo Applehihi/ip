@@ -3,7 +3,7 @@ package jimbo.command;
 import jimbo.JimboException;
 import jimbo.Storage;
 import jimbo.TaskList;
-import jimbo.Ui;
+import jimbo.ui.Ui;
 import jimbo.task.Task;
 
 public class DeleteCommand extends Command {
@@ -14,12 +14,14 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui, TaskList tasks, Storage storage) throws JimboException {
+    public String execute(Ui ui, TaskList tasks, Storage storage) throws JimboException {
+        if (index < 0 || index >= tasks.size()) {
+            return "that's not a valid task :(";
+        }
+
         Task toDelete = tasks.get(index);
         tasks.delete(index);
-        System.out.println("deleted the following task: ");
-        System.out.println(toDelete);
-        ui.printSeparator();
+        return "deleted the following task:\n" + toDelete;
     }
 
     @Override
