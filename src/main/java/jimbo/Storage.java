@@ -56,6 +56,7 @@ public class Storage {
      * @throws JimboException If there is any error reading from file.
      */
     public List<Task> load() throws JimboException {
+        createFileIfNotExists();
         File f = new File(TASK_FILE_PATH);
         Scanner s;
         try {
