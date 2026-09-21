@@ -71,6 +71,9 @@ public abstract class Task {
     }
 
     protected static List<String> deserialiseTags(String data) {
+        if (data.equals("")) {
+            return new ArrayList<>();
+        }
         String[] tagsArray = data.split(",");
         return Arrays.stream(tagsArray).toList();
     }
