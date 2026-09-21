@@ -37,6 +37,8 @@ public class Parser {
             case "deadline" -> getDeadlineCommand(commandSections);
             case "event" -> getEventCommand(commandSections);
             case "find" -> getFindCommand(commandSections);
+            case "tag" -> getTagCommand(commandSections);
+            case "untag" -> getUntagCommand(commandSections);
             default -> throw new JimboException("i don't understand this command");
         };
     }
@@ -143,15 +145,76 @@ public class Parser {
         }
     }
 
+    private static TagCommand getTagCommand(List<String> commandSections) throws JimboException {
+        if (commandSections.size() < 2) {
+            throw new JimboException("expected 2 parameters for commands");
+        }
+        if (commandSections.size() > 2) {
+            throw new JimboException("too many parameters given");
+        }
+
+        assert commandSections.size() == 2 : "Number of command parameters should have been checked";
+
+        String tagFlag = "/tag ";
+        String tagParam = commandSections.get(1);
+        if (!tagParam.contains(tagFlag)) {
+            throw new JimboException("no /tag flag found" + tagParam);
+        }
+        String tag = tagParam.substring(tagParam.indexOf(tagFlag) + tagFlag.length());
+        int index;
+        try {
+            index = Integer.parseInt(commandSections.get(0));
+        } catch (NumberFormatException e) {
+            throw new JimboException("not a valid index");
+        }
+        // Since the list displayed to the user is 1-indexed, we need to
+        // change the task index back to 0-indexing
+        return new TagCommand(index - 1, tag);
+    }
+
+    private static UntagCommand getUntagCommand(List<String> commandSections) throws JimboException {
+        if (commandSections.size() < 2) {
+            throw new JimboException("expected 2 parameters for commands");
+        }
+        if (commandSections.size() > 2) {
+            throw new JimboException("too many parameters given");
+        }
+
+        assert commandSections.size() == 2 : "Number of command parameters should have been checked";
+
+        String tagFlag = "/tag ";
+        String tagParam = commandSections.get(1);
+        if (!tagParam.contains(tagFlag)) {
+            throw new JimboException("no /tag flag found" + tagParam);
+        }
+        String tag = tagParam.substring(tagParam.indexOf(tagFlag) + tagFlag.length());
+        int index;
+        try {
+            index = Integer.parseInt(commandSections.get(0));
+        } catch (NumberFormatException e) {
+            throw new JimboException("not a valid index");
+        }
+        // Since the list displayed to the user is 1-indexed, we need to
+        // change the task index back to 0-indexing
+        return new UntagCommand(index - 1, tag);
+    }
+
     private List<String> splitCommandIntoSections(String[] commandFragments) {
         List<String> commandSections = new ArrayList<>();
         String section = "";
+        boolean isFirstInSection = true;
         for (String fragment : commandFragments) {
             if (!fragment.isEmpty() && fragment.charAt(0) != '/') {
+                if (isFirstInSection) {
+                    section += fragment;
+                    isFirstInSection = false;
+                    continue;
+                }
                 section += " " + fragment;
             } else {
                 commandSections.add(section);
                 section = fragment;
+                isFirstInSection = false;
             }
         }
         commandSections.add(section);
