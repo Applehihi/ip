@@ -65,14 +65,13 @@ public class Jimbo {
     }
 
     public String getResponse(String input) {
-        processInput(input);
-        return "todo";
+        return processInput(input);
     }
 
-    private void processInput(String input) {
+    private String processInput(String input) {
         try {
             Command command = parser.parse(input);
-            command.execute(ui, tasks, storage);
+            String response = command.execute(ui, tasks, storage);
 //            shouldQuit = command.shouldQuit();
             if (command.shouldSave()) {
                 storage.save(tasks.getInternalList());
@@ -80,9 +79,11 @@ public class Jimbo {
             if (command.shouldQuit()) {
                 Platform.exit();
             }
+            return response;
         } catch (JimboException e) {
             System.out.println(e.getMessage());
             ui.printSeparator();
         }
+        return "";
     }
 }
