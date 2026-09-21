@@ -21,8 +21,11 @@ public class UnmarkCommand extends Command {
             return "that's not a valid task :(";
         }
         Task task = tasks.get(index);
+        if (!task.isMarked()) {
+            return "task was already not done... made the task even more undone:\n" + task;
+        }
         task.unmark();
-        return "unmarked the following task:\n" + task;
+        return "oh... i guess you didn't finish the task:\n" + task;
     }
 
     @Override

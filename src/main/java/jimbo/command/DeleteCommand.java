@@ -23,7 +23,7 @@ public class DeleteCommand extends Command {
 
         Task toDelete = tasks.get(index);
         tasks.delete(index);
-        return "deleted the following task:\n" + toDelete;
+        return "*thanos snap*:\n" + toDelete;
     }
 
     @Override

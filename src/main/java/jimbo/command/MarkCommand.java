@@ -21,8 +21,11 @@ public class MarkCommand extends Command {
             return "that's not a valid task :(";
         }
         Task task = tasks.get(index);
+        if (task.isMarked()) {
+            return "made the task even more done:\n " + task;
+        }
         task.mark();
-        return "marked the following task as done:\n" + task;
+        return "good job for doing the task:\n" + task;
     }
 
     @Override

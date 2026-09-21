@@ -10,9 +10,9 @@ public class ListCommand extends Command {
         assert tasks != null : "tasks should not be null";
 
         if (tasks.isEmpty()) {
-            return "no tasks stored";
+            return "wow you're really free";
         }
 
-        return tasks.listAll();
+        return "you should probably do these soon\n" + tasks.listAll();
     }
 }

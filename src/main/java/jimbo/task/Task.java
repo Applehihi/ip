@@ -120,4 +120,8 @@ public abstract class Task {
     public void removeTag(String tag) {
         tags.remove(tag);
     }
+
+    public boolean isMarked() {
+        return isDone;
+    }
 }
