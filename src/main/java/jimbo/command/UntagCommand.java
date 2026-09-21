@@ -26,7 +26,7 @@ public class UntagCommand extends Command {
     @Override
     public String execute(Ui ui, TaskList tasks, Storage storage) throws JimboException {
         if (index < 0 || index >= tasks.size()) {
-            return "that's not a valid task :(";
+            throw new JimboException("that's not a valid task :(");
         }
         Task task = tasks.get(index);
         task.removeTag(tag);

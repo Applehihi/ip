@@ -25,7 +25,7 @@ public class MarkCommand extends Command {
         assert tasks != null : "tasks should not be null";
 
         if (index < 0 || index >= tasks.size()) {
-            return "that's not a valid task :(";
+            throw new JimboException("that's not a valid task :(");
         }
         Task task = tasks.get(index);
         if (task.isMarked()) {
