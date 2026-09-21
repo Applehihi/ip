@@ -18,7 +18,7 @@ public class TaskCommand extends Command {
         assert tasks != null : "tasks should not be null";
 
         tasks.add(task);
-        return "added task:" + task;
+        return "added task: " + task;
     }
 
     @Override

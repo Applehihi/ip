@@ -29,12 +29,12 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from " + from.format(FRIENDLY_DATE_TIME_FORMAT)
-                + " to " + to.format(FRIENDLY_DATE_TIME_FORMAT) + ")";
+                + " to " + to.format(FRIENDLY_DATE_TIME_FORMAT) + ") " + formatTags();
     }
 
     @Override
     public String serialise() {
         return "E|" + super.serialise() + "|" + from.format(INPUT_DATE_TIME_FORMAT) + "|"
-                + to.format(INPUT_DATE_TIME_FORMAT);
+                + to.format(INPUT_DATE_TIME_FORMAT) + "|" + serialiseTags();
     }
 }

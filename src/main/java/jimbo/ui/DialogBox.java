@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 /**
  * Represents a dialog box consisting of an ImageView to represent the speaker's face
@@ -24,9 +25,11 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    // styleClass handling adapted from Claude Sonnet 5 output
+    private DialogBox(String text, Image img, String styleClass) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            getStylesheets().add(getClass().getResource("/css/main.css").toExternalForm());
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
@@ -35,7 +38,9 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.getStyleClass().add(styleClass);
         displayPicture.setImage(img);
+        displayPicture.setClip(new Circle(20, 20, 20));
     }
 
     /**
@@ -49,11 +54,17 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        return new DialogBox(text, img, "user-label");
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+    public static DialogBox getJimboDialog(String text, Image img) {
+        var db = new DialogBox(text, img, "bot-label");
+        db.flip();
+        return db;
+    }
+
+    public static DialogBox getErrorDialog(String text, Image img) {
+        var db = new DialogBox(text, img, "error-label");
         db.flip();
         return db;
     }

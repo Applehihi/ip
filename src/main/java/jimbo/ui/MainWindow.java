@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import jimbo.Jimbo;
+import jimbo.JimboException;
 
 /**
  * Controller for the main GUI.
@@ -25,7 +26,7 @@ public class MainWindow extends AnchorPane {
     private Jimbo jimbo;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image jimboImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     @FXML
     public void initialize() {
@@ -35,6 +36,9 @@ public class MainWindow extends AnchorPane {
     /** Injects the Duke instance */
     public void setJimbo(Jimbo j) {
         jimbo = j;
+        dialogContainer.getChildren().addAll(
+                DialogBox.getJimboDialog("hi i'm jimbo\nnice to meet you", jimboImage)
+        );
     }
 
     /**
@@ -44,11 +48,16 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = jimbo.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+        try {
+            String response = jimbo.getResponse(input);
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getJimboDialog(response, jimboImage));
+        } catch (JimboException e) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getErrorDialog(e.getMessage(), jimboImage));
+        }
         userInput.clear();
     }
 }

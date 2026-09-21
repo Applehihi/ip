@@ -22,11 +22,12 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by " + by.format(FRIENDLY_DATE_TIME_FORMAT) + ")";
+        return "[D]" + super.toString() + " (by " + by.format(FRIENDLY_DATE_TIME_FORMAT) + ") "
+                + formatTags();
     }
 
     @Override
     public String serialise() {
-        return "D|" + super.serialise() + "|" + by.format(INPUT_DATE_TIME_FORMAT);
+        return "D|" + super.serialise() + "|" + by.format(INPUT_DATE_TIME_FORMAT) + "|" + serialiseTags();
     }
 }

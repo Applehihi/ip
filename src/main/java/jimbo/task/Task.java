@@ -56,7 +56,7 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return formatCheckmark() + " " + data + " " + formatTags();
+        return formatCheckmark() + " " + data;
     }
 
     protected String serialiseTags() {
@@ -65,9 +65,9 @@ public abstract class Task {
 
     public String serialise() {
         if (isDone) {
-            return 1 + "|" + data + "|" + serialiseTags();
+            return 1 + "|" + data;
         }
-        return 0 + "|" + data + "|" + serialiseTags();
+        return 0 + "|" + data;
     }
 
     protected static List<String> deserialiseTags(String data) {
