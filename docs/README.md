@@ -141,7 +141,7 @@ and the tags will be shown at the side:
 
 Removes a tag from a task. Will remove the tag that matches the provided tag description exactly.
 
-Format: `tag <task index> /tag <tag description>`
+Format: `untag <task index> /tag <tag description>`
 
 Example:
 
