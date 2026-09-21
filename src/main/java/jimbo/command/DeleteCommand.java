@@ -14,12 +14,10 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui, TaskList tasks, Storage storage) throws JimboException {
+    public String execute(Ui ui, TaskList tasks, Storage storage) throws JimboException {
         Task toDelete = tasks.get(index);
         tasks.delete(index);
-        System.out.println("deleted the following task: ");
-        System.out.println(toDelete);
-        ui.printSeparator();
+        return "deleted the following task:\n" + toDelete;
     }
 
     @Override

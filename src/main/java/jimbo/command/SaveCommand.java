@@ -7,8 +7,9 @@ import jimbo.ui.Ui;
 
 public class SaveCommand extends Command {
     @Override
-    public void execute(Ui ui, TaskList tasks, Storage storage) throws JimboException {
-
+    public String execute(Ui ui, TaskList tasks, Storage storage) throws JimboException {
+        // saving is handled externally, display any message there instead
+        return "";
     }
 
     @Override

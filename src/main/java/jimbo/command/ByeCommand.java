@@ -7,8 +7,8 @@ import jimbo.ui.Ui;
 public class ByeCommand extends Command {
 
     @Override
-    public void execute(Ui ui, TaskList tasks, Storage storage) {
-
+    public String execute(Ui ui, TaskList tasks, Storage storage) {
+        return "bye bye!";
     }
 
     @Override

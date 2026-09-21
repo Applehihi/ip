@@ -14,10 +14,9 @@ public class TaskCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui, TaskList tasks, Storage storage) throws JimboException {
+    public String execute(Ui ui, TaskList tasks, Storage storage) throws JimboException {
         tasks.add(task);
-        System.out.println("added task: " + task);
-        ui.printSeparator();
+        return "added task:" + task;
     }
 
     @Override
