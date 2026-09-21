@@ -1,7 +1,6 @@
 # Jimbo User Guide
 
-
-![Ui.png](Ui.png)
+![Ui.png](docs/Ui.png)
 
 Always wanted an app that can help you track your tasks, deadlines, and events? 🤔
 
