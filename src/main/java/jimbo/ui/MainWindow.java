@@ -36,6 +36,9 @@ public class MainWindow extends AnchorPane {
     /** Injects the Duke instance */
     public void setJimbo(Jimbo j) {
         jimbo = j;
+        dialogContainer.getChildren().addAll(
+                DialogBox.getJimboDialog("hi i'm jimbo\nnice to meet you", jimboImage)
+        );
     }
 
     /**

@@ -25,6 +25,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("Jimbo");
             assert jimbo != null : "Jimbo should have been initialised";
             fxmlLoader.<MainWindow>getController().setJimbo(jimbo); // inject the Jimbo instance
             stage.show();
