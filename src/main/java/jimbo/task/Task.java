@@ -12,6 +12,9 @@ public abstract class Task {
             .ofPattern("yyyy-MM-dd HHmm");
     protected static final DateTimeFormatter FRIENDLY_DATE_TIME_FORMAT = DateTimeFormatter
             .ofPattern("MMM dd yyyy hh:mma");
+    protected static final String INVALID_DATE_TIME_MESSAGE = "invalid date/time, must be in format yyyy-MM-dd HHmm"
+            + "\n" + "example: 2026-01-01 1300 for Jan 1 2026 01:00pm";
+
 
     private String data;
     private boolean isDone;
