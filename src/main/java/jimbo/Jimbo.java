@@ -65,25 +65,24 @@ public class Jimbo {
     }
 
     public String getResponse(String input) {
-        return processInput(input);
+        String response;
+        try {
+            response = processInput(input);
+        } catch (JimboException e) {
+            response = "uh oh:\n" + e.getMessage();
+        }
+        return response;
     }
 
-    private String processInput(String input) {
-        try {
-            Command command = parser.parse(input);
-            String response = command.execute(ui, tasks, storage);
-//            shouldQuit = command.shouldQuit();
-            if (command.shouldSave()) {
-                storage.save(tasks.getInternalList());
-            }
-            if (command.shouldQuit()) {
-                Platform.exit();
-            }
-            return response;
-        } catch (JimboException e) {
-            System.out.println(e.getMessage());
-            ui.printSeparator();
+    private String processInput(String input) throws JimboException{
+        Command command = parser.parse(input);
+        String response = command.execute(ui, tasks, storage);
+        if (command.shouldSave()) {
+            storage.save(tasks.getInternalList());
         }
-        return "";
+        if (command.shouldQuit()) {
+            Platform.exit();
+        }
+        return response;
     }
 }

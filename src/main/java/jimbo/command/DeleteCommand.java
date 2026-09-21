@@ -15,6 +15,10 @@ public class DeleteCommand extends Command {
 
     @Override
     public String execute(Ui ui, TaskList tasks, Storage storage) throws JimboException {
+        if (index < 0 || index >= tasks.size()) {
+            return "that's not a valid task :(";
+        }
+
         Task toDelete = tasks.get(index);
         tasks.delete(index);
         return "deleted the following task:\n" + toDelete;
