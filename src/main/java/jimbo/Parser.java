@@ -158,7 +158,7 @@ public class Parser {
         String tagFlag = "/tag ";
         String tagParam = commandSections.get(1);
         if (!tagParam.contains(tagFlag)) {
-            throw new JimboException("no /tag flag found" + tagParam);
+            throw new JimboException("no /tag flag found");
         }
         String tag = tagParam.substring(tagParam.indexOf(tagFlag) + tagFlag.length());
         int index;
