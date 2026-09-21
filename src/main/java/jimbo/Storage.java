@@ -25,6 +25,7 @@ public class Storage {
         } catch (IOException e) {
             throw new JimboException("failed to create file");
         }
+        assert f.exists() : "File should be created if no exception thrown";
     }
 
     /**
@@ -34,12 +35,13 @@ public class Storage {
      * @throws JimboException If there is any error writing to file.
      */
     public void save(List<? extends Task> tasks) throws JimboException {
+        createFileIfNotExists();
         StringBuilder serialisedData = new StringBuilder();
         for (Task task : tasks) {
             serialisedData.append(task.serialise());
             serialisedData.append('\n');
         }
-        createFileIfNotExists();
+        assert new File(TASK_FILE_PATH).exists() : "File should exist before writing to it";
         try {
             FileWriter fw = new FileWriter(TASK_FILE_PATH);
             fw.write(serialisedData.toString());
