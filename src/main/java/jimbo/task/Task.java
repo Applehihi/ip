@@ -49,7 +49,7 @@ public abstract class Task {
         }
         StringBuilder sb = new StringBuilder();
         sb.append('(');
-        sb.append(String.join(" ", tags));
+        sb.append(String.join(", ", tags));
         sb.append(')');
         return sb.toString();
     }
@@ -76,7 +76,7 @@ public abstract class Task {
     }
 
     public static Task deserialise(String data) throws JimboException {
-        String[] params = data.split("\\|");
+        String[] params = data.split("\\|", -1);
         Task task;
         switch (params[0]) {
             case "T":
