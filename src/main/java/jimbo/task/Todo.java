@@ -10,11 +10,11 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return "[T]" + super.toString() + formatTags();
     }
 
     @Override
     public String serialise() {
-        return "T|" + super.serialise();
+        return "T|" + super.serialise() + "|" + serialiseTags();
     }
 }
