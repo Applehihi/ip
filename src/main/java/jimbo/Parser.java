@@ -72,6 +72,9 @@ public class Parser {
         if (commandSections.size() > 3) {
             throw new JimboException("too many parameters given");
         }
+
+        assert commandSections.size() == 3 : "Number of command parameters should have been checked";
+
         String fromFlag = "/from ";
         String fromParam = commandSections.get(1);
         if (fromParam.indexOf(fromFlag) == -1) {
@@ -95,6 +98,9 @@ public class Parser {
         if (commandSections.size() > 2) {
             throw new JimboException("too many parameters given");
         }
+
+        assert commandSections.size() == 2 : "Number of command parameters should have been checked";
+
         String byFlag = "/by ";
         String byParam = commandSections.get(1);
         if (!byParam.contains(byFlag)) {
