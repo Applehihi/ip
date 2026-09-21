@@ -27,10 +27,16 @@ public abstract class Task {
         this.data = data;
     }
 
+    /**
+     * Marks the task as done.
+     */
     public void mark() {
         isDone = true;
     }
 
+    /**
+     * Unmarks the task as done.
+     */
     public void unmark() {
         isDone = false;
     }
@@ -63,6 +69,11 @@ public abstract class Task {
         return String.join(",", tags);
     }
 
+    /**
+     * Serialises the task into a format suitable for storing in a file.
+     *
+     * @return The serialised task as a string.
+     */
     public String serialise() {
         if (isDone) {
             return 1 + "|" + data;
@@ -78,6 +89,13 @@ public abstract class Task {
         return Arrays.stream(tagsArray).toList();
     }
 
+    /**
+     * Deserialises the task stored in a file back into a Task object.
+     *
+     * @param data The serialised task data
+     * @return The task.
+     * @throws JimboException if the data is invalid.
+     */
     public static Task deserialise(String data) throws JimboException {
         String[] params = data.split("\\|", -1);
         Task task;
@@ -103,24 +121,49 @@ public abstract class Task {
         return task;
     }
 
+    /**
+     * Gets the task description.
+     *
+     * @return The task description.
+     */
     public String getData() {
         return data;
     }
 
+    /**
+     * Adds a tag to the task.
+     *
+     * @param tag The tag to add.
+     */
     public void addTag(String tag) {
         tags.add(tag);
     }
 
+    /**
+     * Adds a batch of tags to the task.
+     *
+     * @param tags The tags to add.
+     */
     public void addTags(List<String> tags) {
         for (String tag : tags) {
             addTag(tag);
         }
     }
 
+    /**
+     * Removes a tag from a task.
+     *
+     * @param tag The tag to remove.
+     */
     public void removeTag(String tag) {
         tags.remove(tag);
     }
 
+    /**
+     * Returns whether the task is marked as done.
+     *
+     * @return Whether the task is marked as done.
+     */
     public boolean isMarked() {
         return isDone;
     }

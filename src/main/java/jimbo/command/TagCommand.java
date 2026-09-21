@@ -6,10 +6,18 @@ import jimbo.TaskList;
 import jimbo.task.Task;
 import jimbo.ui.Ui;
 
+/**
+ * Command for adding a tag to a task.
+ */
 public class TagCommand extends Command {
     private int index;
     private String tag;
 
+    /**
+     *
+     * @param index The index of the task to add a tag to.
+     * @param tag The tag to add.
+     */
     public TagCommand(int index, String tag) {
         this.index = index;
         this.tag = tag;

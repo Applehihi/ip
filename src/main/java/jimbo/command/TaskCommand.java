@@ -6,9 +6,16 @@ import jimbo.TaskList;
 import jimbo.ui.Ui;
 import jimbo.task.Task;
 
+/**
+ * Command for adding a new task.
+ */
 public class TaskCommand extends Command {
     Task task;
 
+    /**
+     *
+     * @param task The task to add.
+     */
     public TaskCommand(Task task) {
         this.task = task;
     }

@@ -33,7 +33,11 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    /** Injects the Jimbo instance */
+    /**
+     * Injects the Jimbo instance.
+     *
+     * @param j The Jimbo instance.
+     */
     public void setJimbo(Jimbo j) {
         jimbo = j;
         dialogContainer.getChildren().addAll(

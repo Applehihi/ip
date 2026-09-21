@@ -6,9 +6,16 @@ import jimbo.TaskList;
 import jimbo.ui.Ui;
 import jimbo.task.Task;
 
+/**
+ * Command for deleting a task.
+ */
 public class DeleteCommand extends Command {
     int index;
 
+    /**
+     *
+     * @param index The index of the task to delete.
+     */
     public DeleteCommand(int index) {
         this.index = index;
     }

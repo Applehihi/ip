@@ -4,6 +4,9 @@ import jimbo.Storage;
 import jimbo.TaskList;
 import jimbo.ui.Ui;
 
+/**
+ * Command to list all tasks.
+ */
 public class ListCommand extends Command {
     @Override
     public String execute(Ui ui, TaskList tasks, Storage storage) {

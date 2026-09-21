@@ -5,6 +5,9 @@ import jimbo.Storage;
 import jimbo.TaskList;
 import jimbo.ui.Ui;
 
+/**
+ * Command to save to file.
+ */
 public class SaveCommand extends Command {
     @Override
     public String execute(Ui ui, TaskList tasks, Storage storage) throws JimboException {

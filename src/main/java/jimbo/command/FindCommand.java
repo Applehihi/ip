@@ -6,9 +6,16 @@ import jimbo.TaskList;
 import jimbo.ui.Ui;
 import jimbo.task.Task;
 
+/**
+ * Command for finding tasks that contain a specified text.
+ */
 public class FindCommand extends Command {
     String toFind;
 
+    /**
+     *
+     * @param toFind The text to find.
+     */
     public FindCommand(String toFind) {
         this.toFind = toFind;
     }

@@ -6,10 +6,18 @@ import jimbo.TaskList;
 import jimbo.task.Task;
 import jimbo.ui.Ui;
 
+/**
+ * Command for removing a tag from a task.
+ */
 public class UntagCommand extends Command {
     private int index;
     private String tag;
 
+    /**
+     *
+     * @param index The index of the task to remove a tag from.
+     * @param tag The tag to remove.
+     */
     public UntagCommand(int index, String tag) {
         this.index = index;
         this.tag = tag;

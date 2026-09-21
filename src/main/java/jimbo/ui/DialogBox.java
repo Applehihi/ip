@@ -53,16 +53,37 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates a dialog box for the user input.
+     *
+     * @param text The user's input.
+     * @param img The user's image.
+     * @return The dialog box.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img, "user-label");
     }
 
+    /**
+     * Creates a dialog box for Jimbo's response.
+     *
+     * @param text Jimbo's response.
+     * @param img Jimbo's image.
+     * @return The dialog box.
+     */
     public static DialogBox getJimboDialog(String text, Image img) {
         var db = new DialogBox(text, img, "bot-label");
         db.flip();
         return db;
     }
 
+    /**
+     * Creates a dialog box for an error.
+     *
+     * @param text The error message.
+     * @param img Jimbo's image.
+     * @return The dialog box.
+     */
     public static DialogBox getErrorDialog(String text, Image img) {
         var db = new DialogBox(text, img, "error-label");
         db.flip();

@@ -6,9 +6,16 @@ import jimbo.TaskList;
 import jimbo.ui.Ui;
 import jimbo.task.Task;
 
+/**
+ * Command for unmarking a task as done.
+ */
 public class UnmarkCommand extends Command {
     int index;
 
+    /**
+     *
+     * @param index The index of the task to unmark.
+     */
     public UnmarkCommand(int index) {
         this.index = index;
     }

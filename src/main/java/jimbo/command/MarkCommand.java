@@ -6,9 +6,16 @@ import jimbo.TaskList;
 import jimbo.ui.Ui;
 import jimbo.task.Task;
 
+/**
+ * Command to mark a task as done.
+ */
 public class MarkCommand extends Command {
     private int index;
 
+    /**
+     *
+     * @param index The index of the task to mark.
+     */
     public MarkCommand(int index) {
         this.index = index;
     }

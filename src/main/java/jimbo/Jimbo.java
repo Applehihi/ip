@@ -37,6 +37,13 @@ public class Jimbo {
         parser = new Parser();
     }
 
+    /**
+     * Gets Jimbo's response to user input.
+     *
+     * @param input The user input.
+     * @return Jimbo's response.
+     * @throws JimboException if an error occurs while processing the user input.
+     */
     public String getResponse(String input) throws JimboException {
         String response;
         try {

@@ -16,6 +16,11 @@ public class Main extends Application {
 
     private Jimbo jimbo = new Jimbo();
 
+    /**
+     * Starts the GUI app.
+     *
+     * @param stage JavaFX stage
+     */
     @Override
     public void start(Stage stage) {
         try {
