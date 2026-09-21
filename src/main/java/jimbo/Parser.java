@@ -38,7 +38,7 @@ public class Parser {
                 // No break since return exits function
             case "mark":
                 try {
-                    var taskIndex = Integer.parseInt(inputFragments[1]);
+                    int taskIndex = Integer.parseInt(inputFragments[1]);
                     // Since the list displayed to the user is 1-indexed, we need to
                     // change it back to 0-indexing
                     return new MarkCommand(taskIndex - 1);
@@ -48,7 +48,7 @@ public class Parser {
                 // No break since return and throw exits function
             case "unmark":
                 try {
-                    var taskIndex = Integer.parseInt(inputFragments[1]);
+                    int taskIndex = Integer.parseInt(inputFragments[1]);
                     // Since the list displayed to the user is 1-indexed, we need to
                     // change it back to 0-indexing
                     return new UnmarkCommand(taskIndex - 1);
@@ -58,7 +58,7 @@ public class Parser {
                 // No break since return and throw exits function
             case "delete":
                 try {
-                    var taskIndex = Integer.parseInt(inputFragments[1]);
+                    int taskIndex = Integer.parseInt(inputFragments[1]);
                     // Since the list displayed to the user is 1-indexed, we need to
                     // change it back to 0-indexing
                     return new DeleteCommand(taskIndex - 1);
@@ -77,6 +77,9 @@ public class Parser {
                 if (commandSections.size() > 2) {
                     throw new JimboException("too many parameters given");
                 }
+
+                assert commandSections.size() == 2 : "Number of command parameters should have been checked";
+
                 String byFlag = "/by ";
                 String byParam = commandSections.get(1);
                 if (!byParam.contains(byFlag)) {
@@ -92,6 +95,9 @@ public class Parser {
                 if (commandSections.size() > 3) {
                     throw new JimboException("too many parameters given");
                 }
+
+                assert commandSections.size() == 3 : "Number of command parameters should have been checked";
+
                 String fromFlag = "/from ";
                 String fromParam = commandSections.get(1);
                 if (fromParam.indexOf(fromFlag) == -1) {

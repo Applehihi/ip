@@ -24,6 +24,7 @@ public class TaskList {
      * @param tasks List of tasks.
      */
     public TaskList(List<Task> tasks) {
+        assert tasks != null : "List of tasks given to initialise a TaskList should not be null";
         this.tasks = tasks;
     }
 
@@ -33,6 +34,7 @@ public class TaskList {
      * @param task The task to add.
      */
     public void add(Task task) {
+        assert tasks != null : "tasks is supposed to have been initialised";
         tasks.add(task);
     }
 
@@ -42,6 +44,7 @@ public class TaskList {
      * @param index The index of the task to delete.
      */
     public void delete(int index) {
+        assert tasks != null : "tasks is supposed to have been initialised";
         tasks.remove(index);
     }
 
@@ -52,6 +55,7 @@ public class TaskList {
      * @return The task.
      */
     public Task get(int index) {
+        assert tasks != null : "tasks is supposed to have been initialised";
         return tasks.get(index);
     }
 
@@ -61,6 +65,7 @@ public class TaskList {
      * @return The number of tasks in the list.
      */
     public int size() {
+        assert tasks != null : "tasks is supposed to have been initialised";
         return tasks.size();
     }
 
@@ -70,6 +75,7 @@ public class TaskList {
      * @return Whether the list is empty.
      */
     public boolean isEmpty() {
+        assert tasks != null : "tasks is supposed to have been initialised";
         return tasks.isEmpty();
     }
 
@@ -79,6 +85,7 @@ public class TaskList {
      * @return The list tasks as a String.
      */
     public String listAll() {
+        assert tasks != null : "tasks is supposed to have been initialised";
         StringBuilder sb = new StringBuilder();
         int counter = 1;
         for (Task task : tasks) {
@@ -86,6 +93,7 @@ public class TaskList {
             sb.append('\n');
             counter++;
         }
+        assert counter - 1 == size() : "Number of tasks listed should match number of tasks stored";
         return sb.toString();
     }
 

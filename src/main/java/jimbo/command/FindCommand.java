@@ -15,6 +15,8 @@ public class FindCommand extends Command {
 
     @Override
     public String execute(Ui ui, TaskList tasks, Storage storage) throws JimboException {
+        assert tasks != null : "tasks should not be null";
+
         int counter = 1;
         StringBuilder response = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
@@ -27,6 +29,8 @@ public class FindCommand extends Command {
         if (counter == 1) {
             return "nothing found :(";
         }
+
+        assert !response.isEmpty() : "Response should not be empty if tasks are found";
         return response.toString();
     }
 }

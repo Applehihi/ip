@@ -19,10 +19,13 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
+            assert Main.class.getResource("/view/MainWindow.fxml") != null  :
+                    "MainWindow.fxml should exist";
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            assert jimbo != null : "Jimbo should have been initialised";
             fxmlLoader.<MainWindow>getController().setJimbo(jimbo); // inject the Jimbo instance
             stage.show();
         } catch (IOException e) {
