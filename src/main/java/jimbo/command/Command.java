@@ -8,6 +8,9 @@ import jimbo.ui.Ui;
 /**
  * Represents a command that Jimbo can perform.
  */
+// The design of having multiple concrete Command classes was inspired
+// by the AI guidance section for the week 3 more OOP task.
+// https://nus-cs2103-ay2627-s1.github.io/website/schedule/week3/project.html#a-moreoop
 public abstract class Command {
     /**
      * Runs the command.
