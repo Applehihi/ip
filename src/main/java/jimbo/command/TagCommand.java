@@ -22,7 +22,7 @@ public class TagCommand extends Command {
         }
         Task task = tasks.get(index);
         task.addTag(tag);
-        return "tagged task: " + task;
+        return "i've put a little tag for this task:\n" + task;
     }
 
     @Override

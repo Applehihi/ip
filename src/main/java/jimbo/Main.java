@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import jimbo.ui.MainWindow;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for Jimbo using FXML.
  */
 public class Main extends Application {
 

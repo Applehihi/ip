@@ -9,7 +9,7 @@ public class SaveCommand extends Command {
     @Override
     public String execute(Ui ui, TaskList tasks, Storage storage) throws JimboException {
         // saving is handled externally, display any message there instead
-        return "";
+        return "tasks are saved automatically but alright";
     }
 
     @Override

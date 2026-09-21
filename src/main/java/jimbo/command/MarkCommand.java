@@ -22,7 +22,7 @@ public class MarkCommand extends Command {
         }
         Task task = tasks.get(index);
         task.mark();
-        return "marked the following task as done:\n" + task;
+        return "good job for doing the task:\n" + task;
     }
 
     @Override

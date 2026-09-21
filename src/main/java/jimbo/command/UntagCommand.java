@@ -22,7 +22,7 @@ public class UntagCommand extends Command {
         }
         Task task = tasks.get(index);
         task.removeTag(tag);
-        return "untagged task: " + task;
+        return "who need tags anyway: \n" + task;
     }
 
     @Override

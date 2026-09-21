@@ -22,7 +22,7 @@ public class UnmarkCommand extends Command {
         }
         Task task = tasks.get(index);
         task.unmark();
-        return "unmarked the following task:\n" + task;
+        return "oh... i guess you didn't finish the task:\n" + task;
     }
 
     @Override

@@ -31,6 +31,6 @@ public class FindCommand extends Command {
         }
 
         assert !response.isEmpty() : "Response should not be empty if tasks are found";
-        return response.toString();
+        return "i found these hidden somewhere:\n" + response;
     }
 }
