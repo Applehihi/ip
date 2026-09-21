@@ -1,13 +1,6 @@
 package jimbo;
 
-import jimbo.command.ByeCommand;
-import jimbo.command.Command;
-import jimbo.command.FindCommand;
-import jimbo.command.ListCommand;
-import jimbo.command.MarkCommand;
-import jimbo.command.SaveCommand;
-import jimbo.command.TaskCommand;
-import jimbo.command.UnmarkCommand;
+import jimbo.command.*;
 import jimbo.task.Deadline;
 import jimbo.task.Event;
 import jimbo.task.Todo;
@@ -59,6 +52,16 @@ public class Parser {
                     // Since the list displayed to the user is 1-indexed, we need to
                     // change it back to 0-indexing
                     return new UnmarkCommand(taskIndex - 1);
+                } catch (NumberFormatException e) {
+                    throw new JimboException("please provide a number");
+                }
+                // No break since return and throw exits function
+            case "delete":
+                try {
+                    var taskIndex = Integer.parseInt(inputFragments[1]);
+                    // Since the list displayed to the user is 1-indexed, we need to
+                    // change it back to 0-indexing
+                    return new DeleteCommand(taskIndex - 1);
                 } catch (NumberFormatException e) {
                     throw new JimboException("please provide a number");
                 }
