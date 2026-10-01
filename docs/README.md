@@ -165,7 +165,7 @@ Simply say `bye` to Jimbo and he will leave.
 
 # Credits
 
-- Claude Sonnet 5 (free) was used to improve the GUI (A-BetterGui).
+- Claude Sonnet 5 (free) was used to improve the GUI (A-BetterGui) and write tests (A-MoreTesting).
 - Inspiration was taken from A-MoreOOP AI guidance section for Command design. 
 (https://nus-cs2103-ay2627-s1.github.io/website/schedule/week3/project.html#a-moreoop)
 - Datetime formats were adapted from the Oracle Java docs
