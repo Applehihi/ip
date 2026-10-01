@@ -14,10 +14,19 @@ import java.util.Scanner;
  * Handles the saving and loading of data.
  */
 public class Storage {
-    private static final String TASK_FILE_PATH = "./tasks.txt";
+    private String file_path;
+
+    /**
+     * Initialises Storage.
+     *
+     * @param file_path The path where data is saved.
+     */
+    public Storage(String file_path) {
+        this.file_path = file_path;
+    }
 
     private void createFileIfNotExists() throws JimboException {
-        File f = new File(TASK_FILE_PATH);
+        File f = new File(file_path);
         try {
             if (!f.exists()) {
                 f.createNewFile();
@@ -41,9 +50,9 @@ public class Storage {
             serialisedData.append(task.serialise());
             serialisedData.append('\n');
         }
-        assert new File(TASK_FILE_PATH).exists() : "File should exist before writing to it";
+        assert new File(file_path).exists() : "File should exist before writing to it";
         try {
-            FileWriter fw = new FileWriter(TASK_FILE_PATH);
+            FileWriter fw = new FileWriter(file_path);
             fw.write(serialisedData.toString());
             fw.close();
         } catch (IOException e) {
@@ -59,7 +68,7 @@ public class Storage {
      */
     public List<Task> load() throws JimboException {
         createFileIfNotExists();
-        File f = new File(TASK_FILE_PATH);
+        File f = new File(file_path);
         Scanner s;
         try {
             s = new Scanner(f);

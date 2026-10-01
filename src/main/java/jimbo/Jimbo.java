@@ -21,9 +21,9 @@ public class Jimbo {
     /**
      * Initialises Jimbo.
      */
-    public Jimbo() {
+    public Jimbo(String file_path) {
         ui = new Ui();
-        storage = new Storage();
+        storage = new Storage(file_path);
 
         try {
             tasks = new TaskList(storage.load());
