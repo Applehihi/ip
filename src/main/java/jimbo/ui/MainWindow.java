@@ -44,7 +44,9 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getJimboDialog("hi i'm jimbo\nnice to meet you", jimboImage)
         );
         if (jimbo.getInitialisationError() != null) {
-            DialogBox.getErrorDialog(jimbo.getInitialisationError(), jimboImage);
+            dialogContainer.getChildren().addAll(
+                DialogBox.getErrorDialog(jimbo.getInitialisationError(), jimboImage)
+            );
         }
     }
 
