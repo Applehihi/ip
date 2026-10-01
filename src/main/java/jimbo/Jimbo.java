@@ -23,17 +23,10 @@ public class Jimbo {
         ui = new Ui();
         storage = new Storage();
 
-        ui.greet();
-
-        System.out.println("trying to load saved tasks...");
         try {
             tasks = new TaskList(storage.load());
-            System.out.println("tasks loaded! " + tasks.size() + " tasks found");
         } catch (JimboException e) {
-            System.out.println(e.getMessage());
-            ui.printSeparator();
         }
-        ui.printSeparator();
         parser = new Parser();
     }
 
