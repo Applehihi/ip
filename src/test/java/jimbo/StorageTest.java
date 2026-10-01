@@ -17,6 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+// Tests generated using ChatGPT 5.6-Luna
+
 class StorageTest {
     @TempDir
     Path temporaryDirectory;
