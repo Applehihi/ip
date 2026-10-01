@@ -69,17 +69,17 @@ public class Storage {
     public List<Task> load() throws JimboException {
         createFileIfNotExists();
         File f = new File(file_path);
-        Scanner s;
-        try {
-            s = new Scanner(f);
+
+        List<Task> tasks = new ArrayList<>();
+
+        try (Scanner s = new Scanner(f)) {
+            while (s.hasNext()) {
+                tasks.add(Task.deserialise(s.nextLine()));
+            }
         } catch (FileNotFoundException e) {
             throw new JimboException("preexisting save file not found");
         }
 
-        List<Task> tasks = new ArrayList<>();
-        while (s.hasNext()) {
-            tasks.add(Task.deserialise(s.nextLine()));
-        }
         return tasks;
     }
 }
