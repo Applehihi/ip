@@ -62,6 +62,8 @@ Format: `event <task description> /from <start datetime> /to <end datetime>`
 
 Example: `event pineapple eating content /from 2026-12-15 1200 /to 2026-12-15 1500`
 
+Note that /from should always come before /to.
+
 ## Listing All Tasks
 
 Lists all tasks in your to-do list.
