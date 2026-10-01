@@ -15,6 +15,8 @@ public class Jimbo {
     private Storage storage;
     private TaskList tasks;
     private Parser parser;
+    private String initialisationError;
+
 
     /**
      * Initialises Jimbo.
@@ -26,8 +28,18 @@ public class Jimbo {
         try {
             tasks = new TaskList(storage.load());
         } catch (JimboException e) {
+            initialisationError = e.getMessage();
         }
         parser = new Parser();
+    }
+
+    /**
+     * Returns any error encountered during initialisation.
+     *
+     * @return The error message encountered during initialisation, or null if there was none.
+     */
+    public String getInitialisationError() {
+        return initialisationError;
     }
 
     /**
