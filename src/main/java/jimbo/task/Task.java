@@ -99,21 +99,25 @@ public abstract class Task {
     public static Task deserialise(String data) throws JimboException {
         String[] params = data.split("\\|", -1);
         Task task;
-        switch (params[0]) {
-            case "T":
-                task = new Todo(params[2]);
-                task.addTags(deserialiseTags(params[3]));
-                break;
-            case "D":
-                task = new Deadline(params[2], params[3]);
-                task.addTags(deserialiseTags(params[4]));
-                break;
-            case "E":
-                task = new Event(params[2], params[3], params[4]);
-                task.addTags(deserialiseTags(params[5]));
-                break;
-            default:
-                throw new JimboException("this task type seems invalid");
+        try {
+            switch (params[0]) {
+                case "T":
+                    task = new Todo(params[2]);
+                    task.addTags(deserialiseTags(params[3]));
+                    break;
+                case "D":
+                    task = new Deadline(params[2], params[3]);
+                    task.addTags(deserialiseTags(params[4]));
+                    break;
+                case "E":
+                    task = new Event(params[2], params[3], params[4]);
+                    task.addTags(deserialiseTags(params[5]));
+                    break;
+                default:
+                    throw new JimboException("this task type seems invalid");
+            }
+        } catch (Exception e) {
+            throw new JimboException("error while loading task, you might have to fix the save file");
         }
         if (params[1].equals("1")) {
             task.mark();

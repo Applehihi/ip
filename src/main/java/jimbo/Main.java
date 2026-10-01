@@ -14,7 +14,7 @@ import jimbo.ui.MainWindow;
  */
 public class Main extends Application {
 
-    private Jimbo jimbo = new Jimbo();
+    private Jimbo jimbo = new Jimbo("./tasks.txt");
 
     /**
      * Starts the GUI app.

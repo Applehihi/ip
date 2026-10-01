@@ -61,6 +61,8 @@ Format: `event <task description> /from <start datetime> /to <end datetime>`
 
 Example: `event pineapple eating content /from 2026-12-15 1200 /to 2026-12-15 1500`
 
+Note that /from should always come before /to.
+
 ## Listing All Tasks
 
 Lists all tasks in your to-do list.
@@ -162,7 +164,8 @@ Simply say `bye` to Jimbo and he will leave.
 
 # Credits
 
-- Claude Sonnet 5 (free) was used to improve the GUI (A-BetterGui).
+- Claude Sonnet 5 was used to improve the GUI (A-BetterGui).
+- Claude Sonnet 5 and ChatGPT-5.6 Luna was used to write tests (A-MoreTesting).
 - Inspiration was taken from A-MoreOOP AI guidance section for Command design.
   (https://nus-cs2103-ay2627-s1.github.io/website/schedule/week3/project.html#a-moreoop)
 - Datetime formats were adapted from the Oracle Java docs

@@ -120,6 +120,8 @@ public class Parser {
             return new DeleteCommand(taskIndex - 1);
         } catch (NumberFormatException e) {
             throw new JimboException("please provide a number");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new JimboException("please provide a valid index");
         }
     }
 
@@ -131,6 +133,8 @@ public class Parser {
             return new UnmarkCommand(taskIndex - 1);
         } catch (NumberFormatException e) {
             throw new JimboException("please provide a number");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new JimboException("please provide a valid index");
         }
     }
 
@@ -142,6 +146,8 @@ public class Parser {
             return new MarkCommand(taskIndex - 1);
         } catch (NumberFormatException e) {
             throw new JimboException("please provide a number");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new JimboException("please provide a valid index");
         }
     }
 
