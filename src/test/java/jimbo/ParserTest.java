@@ -88,8 +88,7 @@ public class ParserTest {
         assertThrows(JimboException.class,
                 () -> parser.parse("event pineapple eating contest /from soon /to 2026-12-15 1500"));
     }
-
-
+    
     @Test
     public void parse_list_returnsListCommand() throws JimboException {
         assertInstanceOf(ListCommand.class, parser.parse("list"));
